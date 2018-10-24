@@ -4,3 +4,4 @@ node_modules/
 .tscache/
 yarn-error.log
 package-lock.json
+plugin.js

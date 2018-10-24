@@ -1,11 +1,16 @@
 {
     "compilerOptions": {
-        "lib": [
-            "es6",
-            "dom",
-            "dom.iterable"
-        ],
-        "target": "es6",
-        "removeComments": false
+      "moduleResolution": "node",
+      "allowJs": true,
+      "module": "umd",
+      "target": "es5",
+      "outDir": "./",
+      "experimentalDecorators": true
     },
+    "files": [
+      "plugin.ts"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
 }

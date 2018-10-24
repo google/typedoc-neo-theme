@@ -4,10 +4,12 @@
   "version": "1.0.0",
   "main": "bin/plugin.js",
   "scripts": {
-    "clean": "./node_modules/.bin/rimraf bin",
+    "clean": "./node_modules/.bin/rimraf bin && rm plugin.js",
     "grunt": "./node_modules/.bin/grunt",
     "tsc": "./node_modules/.bin/tsc",
-    "build:theme": "npm run clean && npm run grunt"
+    "build": "npm run build:theme && npm run build:plugin",
+    "build:theme": "npm run clean && npm run grunt",
+    "build:plugin": "npm run tsc"
   },
   "author": {
     "name": "Nick Felker, based on work by Sebastian Lenz"
@@ -15,6 +17,9 @@
   "license": "Apache-2.0",
   "engines": {
     "node": ">=6"
+  },
+  "dependencies": {
+    "typedoc": "^0.13.0"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
@@ -32,6 +37,7 @@
   "keywords": [
     "typescript",
     "documentation",
-    "generator"
+    "generator",
+    "typedocplugin"
   ]
 }
