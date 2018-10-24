@@ -1,0 +1,37 @@
+{
+  "name": "typedoc-neo-theme",
+  "description": "Improved theme for Typedoc",
+  "version": "1.0.0",
+  "main": "bin/plugin.js",
+  "scripts": {
+    "clean": "./node_modules/.bin/rimraf bin",
+    "grunt": "./node_modules/.bin/grunt",
+    "tsc": "./node_modules/.bin/tsc",
+    "build:theme": "npm run clean && npm run grunt"
+  },
+  "author": {
+    "name": "Nick Felker, based on work by Sebastian Lenz"
+  },
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=6"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-cli": "^1.2.0",
+    "grunt-contrib-copy": "^1.0.0",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-uglify": "^2.3.0",
+    "grunt-contrib-watch": "~1.0.0",
+    "grunt-string-replace": "^1.0.0",
+    "grunt-ts": "^5.5.1",
+    "rimraf": "^2.6.1",
+    "typescript": "^2.9.0"
+  },
+  "keywords": [
+    "typescript",
+    "documentation",
+    "generator"
+  ]
+}
