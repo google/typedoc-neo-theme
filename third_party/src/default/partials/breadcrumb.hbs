@@ -2,9 +2,9 @@
     {{#with parent}}{{> breadcrumb}}{{/with}}
     <li>
         {{#if url}}
-            <a href="{{relativeURL url}}">{{name}}</a>
+            <a href="{{relativeURL url}}">{{removeQuotes name}}</a>
         {{else}}
-            <span>{{name}}</span>
+            <span>{{removeQuotes name}}</span>
         {{/if}}
     </li>
 {{else}}

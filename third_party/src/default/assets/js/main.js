@@ -374,6 +374,133 @@ var typedoc;
     typedoc.MenuSticky = MenuSticky;
     typedoc.registerComponent(MenuSticky, '.menu-sticky');
 })(typedoc || (typedoc = {}));
+function arrayToNest(array) {
+    var _a, _b;
+    var res = {};
+    for (var i = array.length - 1; i >= 0; i--) {
+        if (i == array.length - 1)
+            res = (_a = {}, _a[array[i]] = array[i], _a);
+        else
+            res = (_b = {}, _b[array[i]] = res, _b);
+    }
+    return res;
+}
+function mergeRecursive(obj1, obj2) {
+    for (var p in obj2) {
+        try {
+            if (obj2[p].constructor == Object) {
+                if (obj1[p].constructor !== Object) {
+                    obj1[p] = {
+                        Overview: obj1[p]
+                    };
+                }
+                obj1[p] = mergeRecursive(obj1[p], obj2[p]);
+            }
+            else {
+                obj1[p] = obj2[p];
+            }
+        }
+        catch (e) {
+            obj1[p] = obj2[p];
+        }
+    }
+    return obj1;
+}
+function renderSimpleHTMLRecursive(obj, package, spacing) {
+    if (package === void 0) { package = ''; }
+    if (spacing === void 0) { spacing = '&emsp;'; }
+    var html = '';
+    var shownPackages = [];
+    for (var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++) {
+        var key = _a[_i];
+        if (typeof obj[key] == 'object') {
+            html += renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;');
+        }
+        else {
+            if (shownPackages.indexOf(package) === -1) {
+                html += "<div>" + package.replace(/_/g, '/') + "</div>";
+                shownPackages.push(package);
+            }
+            var href = '';
+            if (window.location.href.indexOf('modules') == -1) {
+                href = 'modules/';
+            }
+            if (window.location.href.indexOf('interfaces') > -1 ||
+                window.location.href.indexOf('assets') > -1 ||
+                window.location.href.indexOf('classes') > -1) {
+                href = '../modules/';
+            }
+            if (package) {
+                if (key === 'Overview') {
+                    href += package.substr(1) + ".html";
+                }
+                else {
+                    href += package.substr(1) + "_" + key + ".html";
+                }
+            }
+            else {
+                href += key + ".html";
+            }
+            html += "<a href='" + href + "'>" + key + "</a>";
+        }
+    }
+    return html;
+}
+function renderHTMLRecursive(obj, package, spacing) {
+    if (package === void 0) { package = ''; }
+    if (spacing === void 0) { spacing = '&emsp;'; }
+    var html = '';
+    var shownPackages = [];
+    for (var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++) {
+        var key = _a[_i];
+        if (typeof obj[key] == 'object') {
+            html += renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;');
+        }
+        else {
+            if (shownPackages.indexOf(package) === -1) {
+                html += "<div>" + package.replace(/_/g, '/').substr(1) + "</div>";
+                shownPackages.push(package);
+            }
+            var href = '';
+            if (window.location.href.indexOf('modules') == -1) {
+                href = 'modules/';
+            }
+            if (window.location.href.indexOf('interfaces') > -1 ||
+                window.location.href.indexOf('assets') > -1 ||
+                window.location.href.indexOf('classes') > -1) {
+                href = '../modules/';
+            }
+            html += "<a href='" + (href + obj[key]) + ".html'>" + key + "</a>";
+        }
+    }
+    return html;
+}
+window.addEventListener('load', function () {
+    if (document.querySelector('.tsd-navigation.outline')) {
+        var filter = '.tsd-navigation ul';
+        var outlineElement = document.querySelector(filter);
+        var outline = JSON.parse(outlineElement.innerHTML)[0];
+        outlineElement.innerHTML = renderHTMLRecursive(outline);
+        outlineElement.style.display = 'block';
+    }
+    else {
+        var filter = '.tsd-navigation .tsd-kind-external-module > a';
+        var modules = document.querySelectorAll(filter);
+        var hierarchy_1 = {};
+        Array.from(modules).forEach(function (m) {
+            var packageArr = m.innerText.split('/');
+            var nestedArr = arrayToNest(packageArr);
+            mergeRecursive(hierarchy_1, nestedArr);
+        });
+        var listItemFilter = '.tsd-navigation .tsd-kind-external-module';
+        var listItems = document.querySelectorAll(listItemFilter);
+        Array.from(listItems).forEach(function (el) {
+            el.remove();
+        });
+        var navigationFilter = '.tsd-navigation ul';
+        document.querySelector(navigationFilter).innerHTML += renderSimpleHTMLRecursive(hierarchy_1);
+    }
+});
 var typedoc;
 (function (typedoc) {
     var search;
@@ -438,6 +565,8 @@ var typedoc;
             }
         }
         function updateResults() {
+            var priorityResults = [];
+            var otherResults = [];
             if (loadingState != SearchLoadingState.Ready)
                 return;
             $results.empty();
@@ -445,9 +574,45 @@ var typedoc;
             for (var i = 0, c = Math.min(10, res.length); i < c; i++) {
                 var row = search.data.rows[res[i].ref];
                 var name = row.name;
+                var fullName = row.parent + "." + name;
                 if (row.parent)
-                    name = '<span class="parent">' + row.parent + '.</span>' + name;
-                $results.append('<li class="' + row.classes + '"><a href="' + base + row.url + '" class="tsd-kind-icon">' + name + '</li>');
+                    name = "<span class=\"parent\">" + row.parent + ".</span>" + name;
+                var priorityResult = document.querySelector(".results-priority li[data-name=\"" + fullName + "\"]");
+                if (priorityResult) {
+                    priorityResults.push("<li class=\"" + row.classes + "\"><a href=\"" + base + row.url + "\" class=\"tsd-kind-icon\">" + name + "&emsp;" +
+                        ("|&emsp;" + priorityResult.dataset.subtitle + "&emsp;|&emsp;" + getKind(row.classes) + "</li>"));
+                }
+                else {
+                    otherResults.push("<li class=\"" + row.classes + " low-priority\"><a href=\"" + base + row.url + "\">" + name + "</li>");
+                }
+            }
+            for (var _i = 0, priorityResults_1 = priorityResults; _i < priorityResults_1.length; _i++) {
+                var result = priorityResults_1[_i];
+                $results.append(result);
+            }
+            for (var _a = 0, otherResults_1 = otherResults; _a < otherResults_1.length; _a++) {
+                var result = otherResults_1[_a];
+                $results.append(result);
+            }
+        }
+        function getKind(classes) {
+            if (classes.indexOf('tsd-kind-class') > -1) {
+                return 'Class';
+            }
+            else if (classes.indexOf('tsd-kind-interface') > -1) {
+                return 'Interface';
+            }
+            else if (classes.indexOf('tsd-kind-property') > -1) {
+                return 'Property';
+            }
+            else if (classes.indexOf('tsd-kind-method') > -1) {
+                return 'Method';
+            }
+            else if (classes.indexOf('tsd-kind-type-alias') > -1) {
+                return 'Type';
+            }
+            else if (classes.indexOf('tsd-kind-function') > -1) {
+                return 'Function';
             }
         }
         function setLoadingState(value) {

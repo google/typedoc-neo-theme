@@ -12,8 +12,16 @@
                         <li class="state loading">Preparing search index...</li>
                         <li class="state failure">The search index is not available</li>
                     </ul>
+                    <ul class="results-priority" style="display:none">
+                        {{#each settings.search}}
+                        <li data-name="{{name}}" data-subtitle="{{subtitle}}"></li>
+                        {{/each}}
+                    </ul>
 
                     <a href="{{relativeURL "index.html"}}" class="title">{{project.name}}</a>
+                    {{#each settings.links}}
+                    &emsp;<a href="{{url}}" class="title">{{label}}</a>
+                    {{/each}}
                 </div>
 
                 <div class="table-cell" id="tsd-widgets">
@@ -54,18 +62,6 @@
             <ul class="tsd-breadcrumb">
                 {{#with model}}{{> breadcrumb}}{{/with}}
             </ul>
-            <h1>{{#compact}}
-                {{model.kindString}}&nbsp;
-                {{model.name}}
-                {{#if model.typeParameters}}
-                    &lt;
-                    {{#each model.typeParameters}}
-                        {{#if @index}},&nbsp;{{/if}}
-                        {{name}}
-                    {{/each}}
-                    &gt;
-                {{/if}}
-            {{/compact}}</h1>
         </div>
     </div>
 </header>

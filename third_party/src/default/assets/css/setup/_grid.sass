@@ -57,3 +57,11 @@
 
     .offset-#{$width}
         margin-left: $width / 12 * 100%
+
+@media (min-width: 1300px)
+    @for $width from 1 to 12
+        .col-#{$width}
+            width: 1200px / 12 * $width
+
+        .offset-#{$width}
+            margin-left: 1200px / 12 * $width

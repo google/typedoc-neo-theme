@@ -13,7 +13,10 @@
         +INDENT($DEPTH, $BASE, $STEP)
 
 .tsd-navigation
-    padding: 0 0 0 40px
+    padding: 0 0 0 0
+    // Fill most of the available content on the page
+    height: calc(100vh - 260px)
+    overflow-y: auto
 
     a
         display: block
@@ -23,9 +26,12 @@
         color: $COLOR_TEXT
         text-decoration: none
         transition: border-left-color 0.1s
+        font-size: 13px
+        word-break: break-word
+        margin-left: 1em
 
         &:hover
-            text-decoration: underline
+            color: blue
 
     ul
         margin: 0
@@ -34,6 +40,9 @@
 
     li
         padding: 0
+
+    div
+        font-size: 13px
 
 
 // Primary part of the navigation containing the available modules.
@@ -160,3 +169,83 @@
 
             &.sticky-current
                 position: sticky
+
+.col-menu
+    position: fixed
+    top: 120px
+
+.secondary-menu
+    margin-left: calc(83% - 50px)
+    overflow-y: auto
+
+@media (min-width: 1300px)
+    .secondary-menu
+        margin-left: 1000px
+
+// Right-hand side table of contents will have labels instead of just icons
+.root
+    > ul
+        > .tsd-parent-kind-class
+            margin-left: 16px
+
+        // Only apply to first element of each class
+        // https://stackoverflow.com/questions/2717480/css-selector-for-first-element-with-class
+        > .tsd-kind-constructor
+            &:before
+                content: "Constructors"
+                font-size: 13px
+                margin-left: 24px
+            ~ .tsd-kind-constructor::before
+                content: none
+
+        > .tsd-kind-property
+            &:before
+                content: "Properties"
+                font-size: 13px
+                margin-left: 24px
+            ~ .tsd-kind-property::before
+                content: none
+
+        > .tsd-kind-get-signature
+            &:before
+                content: "Accessors"
+                font-size: 13px
+                margin-left: 24px
+            ~ .tsd-kind-get-signature::before
+                content: none
+
+        > .tsd-kind-method
+            &:before
+                content: "Methods"
+                font-size: 13px
+                margin-left: 24px
+            ~ .tsd-kind-method::before
+                content: none
+
+.root.tsd-kind-class
+    &:before
+        content: "Classes"
+        font-size: 13px
+    ~ .tsd-kind-class::before
+        content: none
+
+.root.tsd-kind-interface
+    &:before
+        content: "Interfaces"
+        font-size: 13px
+    ~ .tsd-kind-interface::before
+        content: none
+
+.root.tsd-kind-type-alias
+    &:before
+        content: "Types"
+        font-size: 13px
+    ~ .tsd-kind-type-alias::before
+        content: none
+
+.root.tsd-kind-function
+    &:before
+        content: "Functions"
+        font-size: 13px
+    ~ .tsd-kind-function::before
+        content: none

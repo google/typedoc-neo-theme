@@ -141,6 +141,10 @@ module typedoc.search
      * Update the visible state of the search control.
      */
     function updateResults() {
+        // Mediate the search order to highlight priority results
+        const priorityResults = [];
+        const otherResults = [];
+
         if (loadingState != SearchLoadingState.Ready) return;
         $results.empty();
 
@@ -148,8 +152,41 @@ module typedoc.search
         for (var i = 0, c = Math.min(10, res.length); i < c; i++) {
             var row = data.rows[res[i].ref];
             var name = row.name;
-            if (row.parent) name = '<span class="parent">' + row.parent + '.</span>' + name;
-            $results.append('<li class="' + row.classes + '"><a href="' + base + row.url + '" class="tsd-kind-icon">' + name + '</li>');
+            const fullName = `${row.parent}.${name}`
+            if (row.parent) name = `<span class="parent">${row.parent}.</span>${name}`;
+
+            // See if this is a high-priority serach result
+            const priorityResult: HTMLElement = document.querySelector(`.results-priority li[data-name="${fullName}"]`);
+            if (priorityResult) {
+                priorityResults.push(`<li class="${row.classes}"><a href="${base}${row.url}" class="tsd-kind-icon">${name}&emsp;` +
+                `|&emsp;${priorityResult.dataset.subtitle}&emsp;|&emsp;${getKind(row.classes)}</li>`)
+            } else {
+                otherResults.push(`<li class="${row.classes} low-priority"><a href="${base}${row.url}">${name}</li>`)
+            }
+        }
+
+        // Reconstruct the order of results
+        for (const result of priorityResults) {
+            $results.append(result);
+        }
+        for (const result of otherResults) {
+            $results.append(result);
+        }
+    }
+
+    function getKind(classes: string): string {
+        if (classes.indexOf('tsd-kind-class') > -1) {
+            return 'Class'
+        } else if (classes.indexOf('tsd-kind-interface') > -1) {
+            return 'Interface'
+        } else if (classes.indexOf('tsd-kind-property') > -1) {
+            return 'Property'
+        } else if (classes.indexOf('tsd-kind-method') > -1) {
+            return 'Method'
+        } else if (classes.indexOf('tsd-kind-type-alias') > -1) {
+            return 'Type'
+        } else if (classes.indexOf('tsd-kind-function') > -1) {
+            return 'Function'
         }
     }
 

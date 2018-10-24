@@ -6,11 +6,11 @@
     {{else}}
         {{#if isGlobals}}
             <li class="globals {{#if isInPath}}current{{/if}} {{cssClasses}}">
-                <a href="{{relativeURL url}}"><em>{{{wbr title}}}</em></a>
+                <a href="{{relativeURL url}}" style="display:none"><em>{{{removeQuotes title}}}</em></a>
             </li>
         {{else}}
             <li class="{{#if isInPath}}current{{/if}} {{cssClasses}}">
-                <a href="{{relativeURL url}}">{{{wbr title}}}</a>
+                <a href="{{relativeURL url}}" style="display:none">{{{removeQuotes title}}}</a>
                 {{#if isInPath}}
                     {{#if children}}
                         <ul>
