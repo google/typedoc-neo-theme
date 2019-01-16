@@ -4,12 +4,12 @@
   "version": "1.0.0",
   "main": "bin/plugin.js",
   "scripts": {
-    "clean": "./node_modules/.bin/rimraf bin && rm plugin.js",
-    "grunt": "./node_modules/.bin/grunt",
+    "clean": "./node_modules/.bin/rimraf bin",
+    "grunt": "cp ./third_party/gruntfile.js ./ && ./node_modules/.bin/grunt",
     "tsc": "./node_modules/.bin/tsc",
     "build": "npm run build:theme && npm run build:plugin",
     "build:theme": "npm run clean && npm run grunt",
-    "build:plugin": "npm run tsc"
+    "build:plugin": "npm run tsc && mv ./plugin.js ./bin/plugin.js"
   },
   "author": {
     "name": "Nick Felker, based on work by Sebastian Lenz"
