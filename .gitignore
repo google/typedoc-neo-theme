@@ -5,3 +5,6 @@ node_modules/
 yarn-error.log
 package-lock.json
 plugin.js
+/gruntfile.js
+# Hide auto-generated source files
+third_party/src/default/**/*.js
