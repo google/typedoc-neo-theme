@@ -2,14 +2,14 @@
   "name": "typedoc-neo-theme",
   "description": "Improved theme for Typedoc",
   "version": "1.0.0",
-  "main": "bin/plugin.js",
+  "main": "index.js",
   "scripts": {
     "clean": "./node_modules/.bin/rimraf bin",
     "grunt": "cp ./third_party/gruntfile.js ./ && ./node_modules/.bin/grunt",
     "tsc": "./node_modules/.bin/tsc",
     "build": "npm run build:theme && npm run build:plugin",
     "build:theme": "npm run clean && npm run grunt",
-    "build:plugin": "npm run tsc && mv ./plugin.js ./bin/plugin.js"
+    "build:plugin": "npm run tsc && mv ./plugin.js ./bin/default/plugin.js && mkdir ./bin/default/helpers && cp ./third_party/src/default/helpers/*.js ./bin/default/helpers"
   },
   "author": {
     "name": "Nick Felker, based on work by Sebastian Lenz"

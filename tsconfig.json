@@ -8,7 +8,9 @@
       "experimentalDecorators": true
     },
     "files": [
-      "plugin.ts"
+      "plugin.ts",
+      "third_party/src/default/helpers/json.ts",
+      "third_party/src/default/helpers/remove-quotes.ts"
     ],
     "exclude": [
       "node_modules"
