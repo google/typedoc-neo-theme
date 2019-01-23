@@ -109,6 +109,24 @@ module typedoc.search
         }
 
         batch();
+
+        initializePriorityResults();
+    }
+
+    /**
+     * When the search system initializes, pull our priority results and put them in
+     * an array to access later.
+     */
+    function initializePriorityResults() {
+        const priorityResultsDom: Node[] =
+            Array.from(document.querySelectorAll(`.results-priority li`));
+        this.priorityResults = priorityResultsDom.map((node: Node) => {
+            const element = node as HTMLElement;
+            return {
+                name: element.dataset['name'],
+                subtitle: element.dataset['subtitle'],
+            }
+        })
     }
 
 
@@ -155,12 +173,21 @@ module typedoc.search
             const fullName = `${row.parent}.${name}`
             if (row.parent) name = `<span class="parent">${row.parent}.</span>${name}`;
 
-            // See if this is a high-priority serach result
-            const priorityResult: HTMLElement = document.querySelector(`.results-priority li[data-name="${fullName}"]`);
-            if (priorityResult) {
-                priorityResults.push(`<li class="${row.classes}"><a href="${base}${row.url}" class="tsd-kind-icon">${name}&emsp;` +
-                `|&emsp;${priorityResult.dataset.subtitle}&emsp;|&emsp;${getKind(row.classes)}</li>`)
-            } else {
+            // See if this is a high-priority search result
+            let priority = false;
+            for (const result of this.priorityResults) {
+                // Perform regex search against priority results array.
+                // This allows priority results to be regular expressions.
+                if (fullName.match(result.name)) {
+                    priorityResults.push(`<li class="${row.classes}">` +
+                        `<a href="${base}${row.url}" class="tsd-kind-icon">${name}&emsp;|` + 
+                        `&emsp;${result.subtitle}&emsp;|` +
+                        `&emsp;${getKind(row.classes)}</li>`)
+                    priority = true;
+                    break;
+                }
+            }
+            if (!priority) {
                 otherResults.push(`<li class="${row.classes} low-priority"><a href="${base}${row.url}">${name}</li>`)
             }
         }
@@ -187,6 +214,8 @@ module typedoc.search
             return 'Type'
         } else if (classes.indexOf('tsd-kind-function') > -1) {
             return 'Function'
+        } else if (classes.indexOf('tsd-kind-external-module') > -1) {
+            return 'Module'
         }
     }
 
