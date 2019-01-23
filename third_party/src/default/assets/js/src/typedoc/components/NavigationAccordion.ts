@@ -114,13 +114,23 @@ function renderHTMLRecursive(obj: object, package: string = '', spacing: string 
                 shownPackages.push(package)
             }
             let href = ''
-            if (window.location.href.indexOf('modules') == -1) {
+            if (obj[key].indexOf('/') === -1) {
+              // If the user provides a simple string, like
+              // "Overview": "module_name"
+              // It will navigate to "modules/module_name.html"
               href = 'modules/'
+
+              // If the user wants a different kind of page, like
+              // "Overview": "interfaces/interface_name"
+              // This should navigate to "interfaces/interface_name.html"
             }
+            
             if (window.location.href.indexOf('interfaces') > -1 ||
                 window.location.href.indexOf('assets') > -1 ||
+                window.location.href.indexOf('modules') > -1 ||
                 window.location.href.indexOf('classes') > -1) {
-                  href = '../modules/'
+                  // Navigate one step up
+                  href = `../${href}`
             }
             html += `<a href='${href + obj[key]}.html'>${key}</a>`
         }
