@@ -6,9 +6,17 @@ Additionally, it extends Typedoc with additional options for a richer user exper
 
 Visit http://typedoc.org/ to learn more about TypeDoc.
 
+## Theme
+
+Build the theme by running `yarn build:theme`.
+
+After you install the module, you can use this theme in a build by running:
+
+`typedoc --theme ./node_modules/typedoc-neo-theme/bin/default`
+
 ## Plugin
 
-Build the plugin by running `yarn build:plugin`
+Build the plugin by running `yarn build:plugin`.
 
 ### Typedoc options
 This plugin adds additional options that can be placed in your `typedoc.json` file.

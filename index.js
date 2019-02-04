@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-let plugin = require('./third_party/src/default/plugin')
+let plugin = require('./bin/default/plugin')
 module.exports = (PluginHost) => {
   const app = PluginHost.owner
   /*
