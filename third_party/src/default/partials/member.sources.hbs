@@ -11,8 +11,12 @@
     {{#if sources}}
         <ul>
             {{#each sources}}
-                {{#if url}}
-                    <li>Defined in <a href="{{url}}">{{fileName}}:{{line}}</a></li>
+                {{#if @root.settings.source.[0]}}
+                    <li>Defined in
+                        <a href="{{@root.settings.source.[0].path}}{{fileName}}#{{@root.settings.source.[0].line}}{{line}}">
+                            {{fileName}}:{{line}}
+                        </a>
+                    </li>
                 {{else}}
                     <li>Defined in {{fileName}}:{{line}}</li>
                 {{/if}}

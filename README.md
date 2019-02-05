@@ -72,6 +72,19 @@ a kind (like `class` or `interface`). Items not included will be deprioritized, 
   }]
 ```
 
+### Link to source
+You can set up links to your source code under each property in the documentation.
+
+```json
+"source": [{
+  "path": "https://github.com/actions-on-google/actions-on-google-nodejs/blob/master/src/",
+  "line": "L"
+}]
+```
+
+For a particular file and line, this can take you to a valid GitHub source for the
+Actions on Google Node.js project.
+
 ## License
 
 This project is based on [typedoc-default-themes](https://github.com/TypeStrong/typedoc-default-themes/) by

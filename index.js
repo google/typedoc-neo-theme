@@ -39,6 +39,15 @@ module.exports = (PluginHost) => {
    *  }
    */
   app.options.addDeclaration({ name: 'search' })
+  /*
+   * Expected object:
+      interface Source {
+        path: string, eg: https://github.com/actions-on-google/actions-on-google-nodejs/blob/master/src/
+        line: string, eg: L
+        // Becomes https://github.com/actions-on-google/actions-on-google-nodejs/blob/master/src/assistant.ts#L1
+      }
+   */
+  app.options.addDeclaration({ name: 'source' })
 
   app.converter.addComponent('neo-theme', plugin.ExternalModuleMapPlugin)
 }
