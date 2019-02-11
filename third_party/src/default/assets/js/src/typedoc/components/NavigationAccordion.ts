@@ -132,7 +132,15 @@ function renderHTMLRecursive(obj: object, package: string = '', spacing: string 
                   // Navigate one step up
                   href = `../${href}`
             }
-            html += `<a href='${href + obj[key]}.html'>${key}</a>`
+            // Check if the user is currently on this page. If so, bold this item.
+            const pageName = href + obj[key]
+            // Remove any "../" to get a valid page file.
+            const pageNamePath = `${pageName.replace("../", '')}.html`
+            if (window.location.href.indexOf(pageNamePath) > -1) {
+              html += `<a class="selected" href='${pageName}.html'>${key}</a>`
+            } else {
+              html += `<a href='${pageName}.html'>${key}</a>`
+            }
         }
     }
     return html
