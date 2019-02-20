@@ -1,5 +1,7 @@
 # Neo theme for TypeDoc
 
+[![npm](https://img.shields.io/npm/v/typedoc-neo-theme.svg)](https://www.npmjs.com/package/typedoc-neo-theme)
+
 This plugin contains a new theme for TypeDoc which focuses on improved readability and navigation.
 
 Additionally, it extends Typedoc with additional options for a richer user experience.
