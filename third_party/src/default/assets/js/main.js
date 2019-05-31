@@ -1,7 +1,10 @@
 var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
     return function (d, b) {
         extendStatics(d, b);
         function __() { this.constructor = d; }
@@ -462,15 +465,23 @@ function renderHTMLRecursive(obj, package, spacing) {
                 shownPackages.push(package);
             }
             var href = '';
-            if (window.location.href.indexOf('modules') == -1) {
+            if (obj[key].indexOf('/') === -1) {
                 href = 'modules/';
             }
             if (window.location.href.indexOf('interfaces') > -1 ||
                 window.location.href.indexOf('assets') > -1 ||
+                window.location.href.indexOf('modules') > -1 ||
                 window.location.href.indexOf('classes') > -1) {
-                href = '../modules/';
+                href = "../" + href;
             }
-            html += "<a href='" + (href + obj[key]) + ".html'>" + key + "</a>";
+            var pageName = href + obj[key];
+            var pageNamePath = pageName.replace("../", '') + ".html";
+            if (window.location.href.indexOf(pageNamePath) > -1) {
+                html += "<a class=\"selected\" href='" + pageName + ".html'>" + key + "</a>";
+            }
+            else {
+                html += "<a href='" + pageName + ".html'>" + key + "</a>";
+            }
         }
     }
     return html;
@@ -542,6 +553,17 @@ var typedoc;
                 setTimeout(batch, 10);
             }
             batch();
+            initializePriorityResults();
+        }
+        function initializePriorityResults() {
+            var priorityResultsDom = Array.from(document.querySelectorAll(".results-priority li"));
+            this.priorityResults = priorityResultsDom.map(function (node) {
+                var element = node;
+                return {
+                    name: element.dataset['name'],
+                    subtitle: element.dataset['subtitle'],
+                };
+            });
         }
         function loadIndex() {
             if (loadingState != SearchLoadingState.Idle)
@@ -577,21 +599,28 @@ var typedoc;
                 var fullName = row.parent + "." + name;
                 if (row.parent)
                     name = "<span class=\"parent\">" + row.parent + ".</span>" + name;
-                var priorityResult = document.querySelector(".results-priority li[data-name=\"" + fullName + "\"]");
-                if (priorityResult) {
-                    priorityResults.push("<li class=\"" + row.classes + "\"><a href=\"" + base + row.url + "\" class=\"tsd-kind-icon\">" + name + "&emsp;" +
-                        ("|&emsp;" + priorityResult.dataset.subtitle + "&emsp;|&emsp;" + getKind(row.classes) + "</li>"));
+                var priority = false;
+                for (var _i = 0, _a = this.priorityResults; _i < _a.length; _i++) {
+                    var result = _a[_i];
+                    if (fullName.match(result.name)) {
+                        priorityResults.push("<li class=\"" + row.classes + "\">" +
+                            ("<a href=\"" + base + row.url + "\" class=\"tsd-kind-icon\">" + name + "&emsp;|") +
+                            ("&emsp;" + result.subtitle + "&emsp;|") +
+                            ("&emsp;" + getKind(row.classes) + "</li>"));
+                        priority = true;
+                        break;
+                    }
                 }
-                else {
+                if (!priority) {
                     otherResults.push("<li class=\"" + row.classes + " low-priority\"><a href=\"" + base + row.url + "\">" + name + "</li>");
                 }
             }
-            for (var _i = 0, priorityResults_1 = priorityResults; _i < priorityResults_1.length; _i++) {
-                var result = priorityResults_1[_i];
+            for (var _b = 0, priorityResults_1 = priorityResults; _b < priorityResults_1.length; _b++) {
+                var result = priorityResults_1[_b];
                 $results.append(result);
             }
-            for (var _a = 0, otherResults_1 = otherResults; _a < otherResults_1.length; _a++) {
-                var result = otherResults_1[_a];
+            for (var _c = 0, otherResults_1 = otherResults; _c < otherResults_1.length; _c++) {
+                var result = otherResults_1[_c];
                 $results.append(result);
             }
         }
@@ -613,6 +642,9 @@ var typedoc;
             }
             else if (classes.indexOf('tsd-kind-function') > -1) {
                 return 'Function';
+            }
+            else if (classes.indexOf('tsd-kind-external-module') > -1) {
+                return 'Module';
             }
         }
         function setLoadingState(value) {

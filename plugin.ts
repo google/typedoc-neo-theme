@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, ConverterComponent } from 'typedoc/dist/lib/converter/components'
+import { Component, ConverterComponent } from '@gerrit0/typedoc/dist/lib/converter/components'
 
 /**
  * Empty plugin which is used in conjunction with additional typedoc options

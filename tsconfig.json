@@ -3,7 +3,7 @@
       "moduleResolution": "node",
       "allowJs": true,
       "module": "umd",
-      "target": "es5",
+      "target": "es2015",
       "outDir": "./",
       "experimentalDecorators": true
     },
