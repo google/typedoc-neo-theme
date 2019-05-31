@@ -19,7 +19,7 @@
     "node": ">=6"
   },
   "dependencies": {
-    "typedoc": "^0.13.0"
+    "@gerrit0/typedoc": "^0.15.0"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
