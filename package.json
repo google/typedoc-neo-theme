@@ -1,7 +1,7 @@
 {
   "name": "typedoc-neo-theme",
   "description": "Improved theme for Typedoc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "scripts": {
     "clean": "./node_modules/.bin/rimraf bin",
