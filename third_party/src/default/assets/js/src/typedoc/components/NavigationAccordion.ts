@@ -151,7 +151,7 @@ window.addEventListener('load', () => {
     // Get JSON from element
     const filter = '.tsd-navigation ul'
     const outlineElement: HTMLElement = document.querySelector(filter)
-    const outline = JSON.parse(outlineElement.innerHTML)[0]
+    const outline = JSON.parse(outlineElement.innerHTML)
     outlineElement.innerHTML = renderHTMLRecursive(outline)
     outlineElement.style.display = 'block'
   } else {

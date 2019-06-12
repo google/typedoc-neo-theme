@@ -490,7 +490,7 @@ window.addEventListener('load', function () {
     if (document.querySelector('.tsd-navigation.outline')) {
         var filter = '.tsd-navigation ul';
         var outlineElement = document.querySelector(filter);
-        var outline = JSON.parse(outlineElement.innerHTML)[0];
+        var outline = JSON.parse(outlineElement.innerHTML);
         outlineElement.innerHTML = renderHTMLRecursive(outline);
         outlineElement.style.display = 'block';
     }

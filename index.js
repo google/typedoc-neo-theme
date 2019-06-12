@@ -23,14 +23,14 @@ module.exports = (PluginHost) => {
    *    url: string
    *  }
    */
-  app.options.addDeclaration({ name: 'links' })
+  app.options.addDeclaration({ name: 'links', type: 'Array' })
   /*
-   * Expected object:
+   * Expected array:
    *  interface Outline {
    *    [key: string]: string | Outline
    *  }
    */
-  app.options.addDeclaration({ name: 'outline' })
+  app.options.addDeclaration({ name: 'outline', type: 'Array' })
   /*
    * Expected array:
    *  interface Search {
@@ -38,16 +38,16 @@ module.exports = (PluginHost) => {
    *    subtitle: string
    *  }
    */
-  app.options.addDeclaration({ name: 'search' })
+  app.options.addDeclaration({ name: 'search', type: 'Array' })
   /*
-   * Expected object:
+   * Expected array:
       interface Source {
         path: string, eg: https://github.com/actions-on-google/actions-on-google-nodejs/blob/master/src/
         line: string, eg: L
         // Becomes https://github.com/actions-on-google/actions-on-google-nodejs/blob/master/src/assistant.ts#L1
       }
    */
-  app.options.addDeclaration({ name: 'source' })
+  app.options.addDeclaration({ name: 'source', type: 'Array' })
 
   app.converter.addComponent('neo-theme', plugin.ExternalModuleMapPlugin)
 }
