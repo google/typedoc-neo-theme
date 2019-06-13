@@ -6,6 +6,11 @@ This plugin contains a new theme for TypeDoc which focuses on improved readabili
 
 Additionally, it extends Typedoc with additional options for a richer user experience.
 
+![Screenshot of external module design](./resources/screenshot-dialogflow.png)
+
+Visit the [Actions on Google Node.js reference](https://actions-on-google.github.io/actions-on-google-nodejs)
+to view this theme.
+
 Visit http://typedoc.org/ to learn more about TypeDoc.
 
 ## Theme
