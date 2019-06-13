@@ -39,5 +39,13 @@
     "documentation",
     "generator",
     "typedocplugin"
-  ]
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/google/typedoc-neo-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/google/typedoc-neo-theme/issues"
+  },
+  "homepage": "https://github.com/google/typedoc-neo-theme#readme"
 }
