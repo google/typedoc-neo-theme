@@ -63,6 +63,17 @@ function mergeRecursive(obj1: object, obj2: object): object {
     return obj1;
 }
 
+/**
+ * For SimpleHTMLRecursive (no custom outline), follow the sanitization of the URL to correctly
+ * link to what the HTML rendering should have. This useful in cases where a name may be separated
+ * by a character like a dash.
+ *
+ * See https://github.com/TypeStrong/typedoc/blob/14d23b8f13ec9f432ce88c1514326be459af3ccf/src/lib/models/reflections/abstract.ts#L436
+ */
+function sanitizeModuleName(moduleName: string): string {
+  return moduleName.toLowerCase().replace(/[^a-z0-9]/gi, '_')
+}
+
 function renderSimpleHTMLRecursive(obj: object, package: string = '', spacing: string = '&emsp;'): string {
   let html = ''
   const shownPackages = []
@@ -90,10 +101,10 @@ function renderSimpleHTMLRecursive(obj: object, package: string = '', spacing: s
               // If this is the key, we use a simpler page structure
               href += `${package.substr(1)}.html`
             } else {
-              href += `${package.substr(1)}_${key}.html`
+              href += `${package.substr(1)}_${sanitizeModuleName(key)}.html`
             }
           } else {
-            href += `${key}.html`
+            href += `${sanitizeModuleName(key)}.html`
           }
           html += `<a href='${href}'>${key}</a>`
       }

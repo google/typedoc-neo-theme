@@ -409,6 +409,9 @@ function mergeRecursive(obj1, obj2) {
     }
     return obj1;
 }
+function sanitizeModuleName(moduleName) {
+    return moduleName.toLowerCase().replace(/[^a-z0-9]/gi, '_');
+}
 function renderSimpleHTMLRecursive(obj, package, spacing) {
     if (package === void 0) { package = ''; }
     if (spacing === void 0) { spacing = '&emsp;'; }
@@ -438,11 +441,11 @@ function renderSimpleHTMLRecursive(obj, package, spacing) {
                     href += package.substr(1) + ".html";
                 }
                 else {
-                    href += package.substr(1) + "_" + key + ".html";
+                    href += package.substr(1) + "_" + sanitizeModuleName(key) + ".html";
                 }
             }
             else {
-                href += key + ".html";
+                href += sanitizeModuleName(key) + ".html";
             }
             html += "<a href='" + href + "'>" + key + "</a>";
         }
