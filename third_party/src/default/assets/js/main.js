@@ -468,10 +468,11 @@ function renderHTMLRecursive(obj, package, spacing) {
             if (obj[key].indexOf('/') === -1) {
                 href = 'modules/';
             }
-            if (window.location.href.indexOf('interfaces') > -1 ||
-                window.location.href.indexOf('assets') > -1 ||
-                window.location.href.indexOf('modules') > -1 ||
-                window.location.href.indexOf('classes') > -1) {
+            if (window.location.href.indexOf('assets') > -1 ||
+                window.location.href.indexOf('classes') > -1 ||
+                window.location.href.indexOf('enums') > -1 ||
+                window.location.href.indexOf('interfaces') > -1 ||
+                window.location.href.indexOf('modules') > -1) {
                 href = "../" + href;
             }
             var pageName = href + obj[key];

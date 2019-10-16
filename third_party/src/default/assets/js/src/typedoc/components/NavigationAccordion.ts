@@ -125,10 +125,11 @@ function renderHTMLRecursive(obj: object, package: string = '', spacing: string 
               // This should navigate to "interfaces/interface_name.html"
             }
             
-            if (window.location.href.indexOf('interfaces') > -1 ||
-                window.location.href.indexOf('assets') > -1 ||
-                window.location.href.indexOf('modules') > -1 ||
-                window.location.href.indexOf('classes') > -1) {
+            if (window.location.href.indexOf('assets') > -1 ||
+                window.location.href.indexOf('classes') > -1 ||
+                window.location.href.indexOf('enums') > -1 ||
+                window.location.href.indexOf('interfaces') > -1 ||
+                window.location.href.indexOf('modules') > -1) {
                   // Navigate one step up
                   href = `../${href}`
             }
