@@ -169,3 +169,14 @@
 
         .tsd-select-label:before
             background-position: -280px 0
+
+@media screen and (max-width: 900px)
+    // On small devices, shift tools to the right 40px and make heading scrollable
+    .tsd-page-toolbar
+        overflow: auto
+
+    .tsd-widget.search.no-caption
+        right: -80px
+
+    #tsd-widgets
+        padding-left: 40px
