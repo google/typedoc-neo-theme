@@ -1,7 +1,7 @@
 {
   "name": "typedoc-neo-theme",
   "description": "Improved theme for Typedoc",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "scripts": {
     "clean": "./node_modules/.bin/rimraf bin",
@@ -19,7 +19,7 @@
     "node": ">=6"
   },
   "dependencies": {
-    "@gerrit0/typedoc": "^0.15.0"
+    "typedoc": "0.15.0"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
