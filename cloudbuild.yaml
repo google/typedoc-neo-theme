@@ -1,0 +1,12 @@
+steps:
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['install']
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['test']
+- name: 'gcr.io/cloud-builders/npm'
+  args: ['pack']
+artifacts:
+  objects:
+    # Store generated files in a Cloud Storage bucket with the commit hash as directory
+    location: 'gs://typedoc-neo-theme/$SHORT_SHA'
+    paths: ['*.tgz']
