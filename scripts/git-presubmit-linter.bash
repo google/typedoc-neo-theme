@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 set -e
-set -x
+set -x #FIXME
 GIT_PRESUBMIT_LINTER='git-presubmit-linter'
 RULES="${GIT_PRESUBMIT_LINTER}/rules"
 
@@ -28,7 +28,7 @@ else
     cd ../
 fi
 
-# IFS=$' ' # Separate input by space
+IFS=$' ' # Separate input by space
 # Run "Verify package contents"
 EXPECT=$(cat ./scripts/expected-files.txt)
 TAR=$(yarn pack | grep -Eo "/.*tgz")
