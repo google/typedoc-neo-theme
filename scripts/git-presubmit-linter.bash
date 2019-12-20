@@ -32,6 +32,7 @@ IFS=$' ' # Separate input by space
 # Run "Verify package contents"
 EXPECT=$(cat ./scripts/expected-files.txt)
 TAR=$(yarn pack | grep -Eo "/.*tgz")
+TARF=$(tar -tf ${TAR})
 while read tarFile
 do
     VALID=0
@@ -48,7 +49,7 @@ do
         echo "$tarFile does not match any pattern"
         REJECTED_FILES=$((REJECTED_FILES + 1))
     fi
-done <<< $TAR
+done <<< $TARF
 # tar -tf "${TAR}" | ./git-presubmit-linter/tools/filelist.sh ./scripts/expected-files.txt
 
 # Run "Changelog"
