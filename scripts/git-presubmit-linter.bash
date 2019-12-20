@@ -28,11 +28,26 @@ else
 fi
 
 IFS=$' ' # Separate input by space
-cat ./scripts/expected-files.txt
 # Run "Verify package contents"
 TAR=$(yarn pack | grep -Eo "/.*tgz")
-echo $(tar -tf "${TAR}")
-tar -tf "${TAR}" | ./git-presubmit-linter/tools/filelist.sh ./scripts/expected-files.txt
+while read tarFile
+do
+    VALID=0
+    while read pattern
+    do
+        echo "$tarFile" | grep -Po "^$pattern\$"
+        if [ $? -eq 0 ]; then
+            echo "Package file matches a valid pattern"
+            VALID=1
+            break
+        fi
+    done <<< `cat ./scripts/expected-files.txt`
+    if [ $VALID -ne 1 ]; then
+        echo "$tarFile does not match any pattern"
+        REJECTED_FILES=$((REJECTED_FILES + 1))
+    fi
+done <<< $TAR
+# tar -tf "${TAR}" | ./git-presubmit-linter/tools/filelist.sh ./scripts/expected-files.txt
 
 # Run "Changelog"
 git fetch --all # Fetch project HEAD
