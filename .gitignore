@@ -8,3 +8,7 @@ plugin.js
 /gruntfile.js
 # Hide auto-generated source files
 third_party/src/default/**/*.js
+# Continuous integration
+git-presubmit-linter/
+.changelog
+*.tgz
