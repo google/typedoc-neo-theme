@@ -419,8 +419,8 @@ function renderSimpleHTMLRecursive(obj, package, spacing) {
     var shownPackages = [];
     for (var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++) {
         var key = _a[_i];
-        if (typeof obj[key] == 'object') {
-            html += renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;');
+        if (typeof obj[key] === 'object') {
+            html += renderSimpleHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;');
         }
         else {
             if (shownPackages.indexOf(package) === -1) {
@@ -431,21 +431,23 @@ function renderSimpleHTMLRecursive(obj, package, spacing) {
             if (window.location.href.indexOf('modules') == -1) {
                 href = 'modules/';
             }
-            if (window.location.href.indexOf('interfaces') > -1 ||
-                window.location.href.indexOf('assets') > -1 ||
-                window.location.href.indexOf('classes') > -1) {
-                href = '../modules/';
+            if (window.location.href.indexOf('assets') > -1 ||
+                window.location.href.indexOf('classes') > -1 ||
+                window.location.href.indexOf('enums') > -1 ||
+                window.location.href.indexOf('interfaces') > -1 ||
+                window.location.href.indexOf('modules') > -1) {
+                href = "../" + href;
             }
             if (package) {
                 if (key === 'Overview') {
-                    href += package.substr(1) + ".html";
+                    href += "_" + package.substr(1) + "_.html";
                 }
                 else {
-                    href += package.substr(1) + "_" + sanitizeModuleName(key) + ".html";
+                    href += "_" + package.substr(1) + "_" + sanitizeModuleName(key) + "_.html";
                 }
             }
             else {
-                href += sanitizeModuleName(key) + ".html";
+                href += "_" + sanitizeModuleName(key) + "_.html";
             }
             html += "<a href='" + href + "'>" + key + "</a>";
         }
@@ -491,6 +493,7 @@ function renderHTMLRecursive(obj, package, spacing) {
     return html;
 }
 window.addEventListener('load', function () {
+    console.log('loaded v101');
     if (document.querySelector('.tsd-navigation.outline')) {
         var filter = '.tsd-navigation ul';
         var outlineElement = document.querySelector(filter);

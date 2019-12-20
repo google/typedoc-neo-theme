@@ -74,91 +74,110 @@ function sanitizeModuleName(moduleName: string): string {
   return moduleName.toLowerCase().replace(/[^a-z0-9]/gi, '_')
 }
 
+/**
+ * Rendering left-hand side outline when custom outline is not available in typedoc.json
+ *
+ * @param obj List of modules
+ * @param package The current parent name
+ * @param spacing The current spacing, to display a hierarchy appropriately
+ * @return HTML for the left-hand side outline as a string
+ */
 function renderSimpleHTMLRecursive(obj: object, package: string = '', spacing: string = '&emsp;'): string {
   let html = ''
   const shownPackages = []
   for (const key of Object.keys(obj)) {
-      if (typeof obj[key] == 'object') {
-          // is an object
-          // html += key + '<br>' + spacing + renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;')
-          html += renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;')
-      } else {
-          if (shownPackages.indexOf(package) === -1) {
-              html += `<div>${package.replace(/_/g, '/')}</div>`
-              shownPackages.push(package)
-          }
-          let href = ''
-          if (window.location.href.indexOf('modules') == -1) {
-            href = 'modules/'
-          }
-          if (window.location.href.indexOf('interfaces') > -1 ||
-              window.location.href.indexOf('assets') > -1 ||
-              window.location.href.indexOf('classes') > -1) {
-                href = '../modules/'
-          }
-          if (package) {
-            if (key === 'Overview') {
-              // If this is the key, we use a simpler page structure
-              href += `${package.substr(1)}.html`
-            } else {
-              href += `${package.substr(1)}_${sanitizeModuleName(key)}.html`
-            }
-          } else {
-            href += `${sanitizeModuleName(key)}.html`
-          }
-          html += `<a href='${href}'>${key}</a>`
+    if (typeof obj[key] === 'object') {
+      // As this is an object, traversal will continue
+      html += renderSimpleHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;')
+    } else {
+      if (shownPackages.indexOf(package) === -1) {
+          html += `<div>${package.replace(/_/g, '/')}</div>`
+          shownPackages.push(package)
       }
+      let href = ''
+      if (window.location.href.indexOf('modules') == -1) {
+        href = 'modules/'
+      }
+      if (window.location.href.indexOf('assets') > -1 ||
+          window.location.href.indexOf('classes') > -1 ||
+          window.location.href.indexOf('enums') > -1 ||
+          window.location.href.indexOf('interfaces') > -1 ||
+          window.location.href.indexOf('modules') > -1) {
+            // Navigate one step up
+            href = `../${href}`
+      }
+      if (package) {
+        if (key === 'Overview') {
+          // If this is the key, use a simpler page structure
+          href += `_${package.substr(1)}_.html`
+        } else {
+          href += `_${package.substr(1)}_${sanitizeModuleName(key)}_.html`
+        }
+      } else {
+        href += `_${sanitizeModuleName(key)}_.html`
+      }
+      html += `<a href='${href}'>${key}</a>`
+    }
   }
   return html
 }
 
+/**
+ * Rendering left-hand side outline when custom outline is provided
+ *
+ * @param obj List of modules
+ * @param package The current parent name
+ * @param spacing The current spacing, to display a hierarchy appropriately
+ * @return HTML for the left-hand side outline as a string
+ */
 function renderHTMLRecursive(obj: object, package: string = '', spacing: string = '&emsp;'): string {
     let html = ''
     const shownPackages = []
     for (const key of Object.keys(obj)) {
-        if (typeof obj[key] == 'object') {
-            // is an object
-            html += renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;')
-        } else {
-            if (shownPackages.indexOf(package) === -1) {
-                html += `<div>${package.replace(/_/g, '/').substr(1)}</div>`
-                shownPackages.push(package)
-            }
-            let href = ''
-            if (obj[key].indexOf('/') === -1) {
-              // If the user provides a simple string, like
-              // "Overview": "module_name"
-              // It will navigate to "modules/module_name.html"
-              href = 'modules/'
-
-              // If the user wants a different kind of page, like
-              // "Overview": "interfaces/interface_name"
-              // This should navigate to "interfaces/interface_name.html"
-            }
-            
-            if (window.location.href.indexOf('assets') > -1 ||
-                window.location.href.indexOf('classes') > -1 ||
-                window.location.href.indexOf('enums') > -1 ||
-                window.location.href.indexOf('interfaces') > -1 ||
-                window.location.href.indexOf('modules') > -1) {
-                  // Navigate one step up
-                  href = `../${href}`
-            }
-            // Check if the user is currently on this page. If so, bold this item.
-            const pageName = href + obj[key]
-            // Remove any "../" to get a valid page file.
-            const pageNamePath = `${pageName.replace("../", '')}.html`
-            if (window.location.href.indexOf(pageNamePath) > -1) {
-              html += `<a class="selected" href='${pageName}.html'>${key}</a>`
-            } else {
-              html += `<a href='${pageName}.html'>${key}</a>`
-            }
+      if (typeof obj[key] == 'object') {
+        // is an object
+        html += renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;')
+      } else {
+        if (shownPackages.indexOf(package) === -1) {
+            html += `<div>${package.replace(/_/g, '/').substr(1)}</div>`
+            shownPackages.push(package)
         }
+        let href = ''
+        if (obj[key].indexOf('/') === -1) {
+          // If the user provides a simple string, like
+          // "Overview": "module_name"
+          // It will navigate to "modules/module_name.html"
+          href = 'modules/'
+
+          // If the user wants a different kind of page, like
+          // "Overview": "interfaces/interface_name"
+          // This should navigate to "interfaces/interface_name.html"
+        }
+        
+        if (window.location.href.indexOf('assets') > -1 ||
+            window.location.href.indexOf('classes') > -1 ||
+            window.location.href.indexOf('enums') > -1 ||
+            window.location.href.indexOf('interfaces') > -1 ||
+            window.location.href.indexOf('modules') > -1) {
+              // Navigate one step up
+              href = `../${href}`
+        }
+        // Check if the user is currently on this page. If so, bold this item.
+        const pageName = href + obj[key]
+        // Remove any "../" to get a valid page file.
+        const pageNamePath = `${pageName.replace("../", '')}.html`
+        if (window.location.href.indexOf(pageNamePath) > -1) {
+          html += `<a class="selected" href='${pageName}.html'>${key}</a>`
+        } else {
+          html += `<a href='${pageName}.html'>${key}</a>`
+        }
+      }
     }
     return html
 }
 
 window.addEventListener('load', () => {
+  // This element will exist if there is a custom outline defined
   if (document.querySelector('.tsd-navigation.outline')) {
     // Get JSON from element
     const filter = '.tsd-navigation ul'
@@ -167,7 +186,7 @@ window.addEventListener('load', () => {
     outlineElement.innerHTML = renderHTMLRecursive(outline)
     outlineElement.style.display = 'block'
   } else {
-    // Get all of the navigation modules
+    // Get all of the navigation modules as part of a generic outline
     const filter = '.tsd-navigation .tsd-kind-external-module > a'
     const modules = document.querySelectorAll(filter) as NodeListOf<HTMLAnchorElement>
     const hierarchy = {}
@@ -176,11 +195,13 @@ window.addEventListener('load', () => {
         const nestedArr = arrayToNest(packageArr);
         mergeRecursive(hierarchy, nestedArr)
     })
+    // Delete existing HTML elements that were auto-generated
     const listItemFilter = '.tsd-navigation .tsd-kind-external-module'
     const listItems = document.querySelectorAll(listItemFilter) as NodeListOf<HTMLElement>
     Array.from(listItems).forEach(el => {
         el.remove()
     })
+    // Update the contents of the outline based on the new hierarchy
     const navigationFilter = '.tsd-navigation ul'
     document.querySelector(navigationFilter).innerHTML += renderSimpleHTMLRecursive(hierarchy)
   }
