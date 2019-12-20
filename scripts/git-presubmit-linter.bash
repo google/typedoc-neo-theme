@@ -29,7 +29,7 @@ else
 fi
 
 set +e
-IFS=$'\n' # Separate input by space
+IFS=$' ' # Separate input by space
 # Run "Verify package contents"
 EXPECT=$(cat ./scripts/expected-files.txt)
 TAR=$(yarn pack | grep -Eo "/.*tgz")
