@@ -29,9 +29,9 @@ fi
 
 IFS=$' ' # Separate input by space
 cat ./scripts/expected-files.txt
-echo $(tar -tf "${TAR}")
 # Run "Verify package contents"
 TAR=$(yarn pack | grep -Eo "/.*tgz")
+echo $(tar -tf "${TAR}")
 tar -tf "${TAR}" | ./git-presubmit-linter/tools/filelist.sh ./scripts/expected-files.txt
 
 # Run "Changelog"
