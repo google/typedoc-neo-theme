@@ -88,7 +88,7 @@ function renderSimpleHTMLRecursive(obj: object, package: string = '', spacing: s
   for (const key of Object.keys(obj)) {
     if (typeof obj[key] === 'object') {
       // As this is an object, traversal will continue
-      html += renderSimpleHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;')
+      html += renderSimpleHTMLRecursive(obj[key], `${package}_${key}`, spacing + '&emsp;')
     } else {
       if (shownPackages.indexOf(package) === -1) {
           html += `<div>${package.replace(/_/g, '/')}</div>`

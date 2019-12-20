@@ -420,7 +420,7 @@ function renderSimpleHTMLRecursive(obj, package, spacing) {
     for (var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++) {
         var key = _a[_i];
         if (typeof obj[key] === 'object') {
-            html += renderSimpleHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;');
+            html += renderSimpleHTMLRecursive(obj[key], package + "_" + key, spacing + '&emsp;');
         }
         else {
             if (shownPackages.indexOf(package) === -1) {
@@ -493,7 +493,6 @@ function renderHTMLRecursive(obj, package, spacing) {
     return html;
 }
 window.addEventListener('load', function () {
-    console.log('loaded v101');
     if (document.querySelector('.tsd-navigation.outline')) {
         var filter = '.tsd-navigation ul';
         var outlineElement = document.querySelector(filter);
