@@ -3,7 +3,7 @@ steps:
   args: ['install']
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'test:ci']
-- name: 'ubuntu'
+- name: 'gcr.io/cloud-builders/git'
   args: ['bash', './scripts/git-presubmit-linter.bash']
 artifacts:
   objects:
