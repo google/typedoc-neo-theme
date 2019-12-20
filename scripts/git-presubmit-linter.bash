@@ -38,7 +38,8 @@ do
     VALID=0
     while read pattern
     do
-        echo "$tarFile" | grep -Po "^$pattern\$"
+        # echo "$tarFile" | grep -Po "^$pattern\$"
+        echo $tarFile $pattern
         if [ $? -eq 0 ]; then
             echo "Package file matches a valid pattern"
             VALID=1
