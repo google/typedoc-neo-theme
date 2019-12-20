@@ -40,7 +40,7 @@ do
     VALID=0
     while read pattern
     do
-        echo "$tarFile" | grep -Po "^$pattern\$"
+        echo "$tarFile" | grep -Po "^$pattern\$" < /dev/null
         if [ $? -eq 0 ]; then
             # Package file matches a valid pattern
             VALID=1
@@ -56,3 +56,4 @@ if [ $REJECTED_FILES -gt 0 ]; then
     echo "Filelist check failed ($REJECTED_FILES item(s) invalid)"
     exit 1
 fi
+git log -5
