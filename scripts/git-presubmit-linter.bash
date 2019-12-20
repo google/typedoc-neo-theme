@@ -31,26 +31,4 @@ fi
 set +e
 IFS=$' ' # Separate input by space
 # Run "Verify package contents"
-EXPECT=$(cat ./scripts/expected-files.txt)
-TAR=$(yarn pack | grep -Eo "/.*tgz")
-TARF=$(tar -tf ${TAR})
-while read tarFile
-do
-    VALID=0
-    while read pattern
-    do
-        echo "$tarFile" | grep -Po "^$pattern\$"
-        # echo $? $tarFile $pattern
-        if [ $? -eq 0 ]; then
-            echo "Package file matches a valid pattern"
-            VALID=1
-            break
-        fi
-    done <<< $EXPECT
-    if [ $VALID -ne 1 ]; then
-        echo "$tarFile does not match any pattern"
-        REJECTED_FILES=$((REJECTED_FILES + 1))
-        echo "Filelist check failed ($REJECTED_FILES item(s) invalid)"
-    fi
-done <<< $TARF
-# tar -tf "${TAR}" | ./git-presubmit-linter/tools/filelist.sh ./scripts/expected-files.txt
+tar -tf "${TAR}" | ./git-presubmit-linter/tools/filelist.sh ./scripts/expected-files.txt
