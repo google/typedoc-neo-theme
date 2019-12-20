@@ -1,9 +1,9 @@
 steps:
-- name: 'gcr.io/cloud-builders/npm'
+- name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['run', 'test:ci']
-- name: 'gcr.io/cloud-builders/git'
+- name: 'gcr.io/cloud-builders/yarn'
+  args: ['test:ci']
+- name: 'gcr.io/cloud-builders/yarn'
   entrypoint: bash
   args: ['./scripts/git-presubmit-linter.bash']
 artifacts:
