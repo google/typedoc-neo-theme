@@ -56,4 +56,3 @@ if [ $REJECTED_FILES -gt 0 ]; then
     echo "Filelist check failed ($REJECTED_FILES item(s) invalid)"
     exit 1
 fi
-git log -5
