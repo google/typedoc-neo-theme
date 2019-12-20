@@ -40,7 +40,7 @@ do
     VALID=0
     while read pattern
     do
-        echo "$tarFile" | grep -Po "^$pattern\$" < /dev/null
+        echo "$tarFile" | grep -Po "^$pattern\$" > /dev/null
         if [ $? -eq 0 ]; then
             # Package file matches a valid pattern
             VALID=1
