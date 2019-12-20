@@ -4,7 +4,8 @@ steps:
 - name: 'gcr.io/cloud-builders/npm'
   args: ['run', 'test:ci']
 - name: 'gcr.io/cloud-builders/git'
-  args: ['bash', './scripts/git-presubmit-linter.bash']
+  entrypoint: bash
+  args: ['./scripts/git-presubmit-linter.bash']
 artifacts:
   objects:
     # Store generated files in a Cloud Storage bucket with the commit hash as directory
