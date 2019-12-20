@@ -14,6 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 set -e
+set -x
 GIT_PRESUBMIT_LINTER='git-presubmit-linter'
 RULES="${GIT_PRESUBMIT_LINTER}/rules"
 
@@ -27,8 +28,9 @@ else
     cd ../
 fi
 
-IFS=$' ' # Separate input by space
+# IFS=$' ' # Separate input by space
 # Run "Verify package contents"
+EXPECT=$(cat ./scripts/expected-files.txt)
 TAR=$(yarn pack | grep -Eo "/.*tgz")
 while read tarFile
 do
@@ -41,7 +43,7 @@ do
             VALID=1
             break
         fi
-    done <<< `cat ./scripts/expected-files.txt`
+    done <<< $EXPECT
     if [ $VALID -ne 1 ]; then
         echo "$tarFile does not match any pattern"
         REJECTED_FILES=$((REJECTED_FILES + 1))
