@@ -27,7 +27,7 @@ else
     cd ../
 fi
 
-IFS=$'\n'
+IFS=$' ' # Separate input by space
 # Run "Verify package contents"
 TAR=$(yarn pack | grep -Eo "/.*tgz")
 tar -tf "${TAR}" | ./git-presubmit-linter/tools/filelist.sh ./scripts/expected-files.txt
