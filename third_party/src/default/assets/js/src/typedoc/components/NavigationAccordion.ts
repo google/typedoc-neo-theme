@@ -74,88 +74,103 @@ function sanitizeModuleName(moduleName: string): string {
   return moduleName.toLowerCase().replace(/[^a-z0-9]/gi, '_')
 }
 
-function renderSimpleHTMLRecursive(obj: object, package: string = '', spacing: string = '&emsp;'): string {
-  let html = ''
-  const shownPackages = []
+function renderSimpleHTMLRecursive(
+  obj: object,
+  package: string = '',
+  spacing: string = '&emsp;',
+): string {
+  let html = '';
+  const shownPackages = [];
   for (const key of Object.keys(obj)) {
-      if (typeof obj[key] == 'object') {
-          // is an object
-          // html += key + '<br>' + spacing + renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;')
-          html += renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;')
-      } else {
-          if (shownPackages.indexOf(package) === -1) {
-              html += `<div>${package.replace(/_/g, '/')}</div>`
-              shownPackages.push(package)
-          }
-          let href = ''
-          if (window.location.href.indexOf('modules') == -1) {
-            href = 'modules/'
-          }
-          if (window.location.href.indexOf('interfaces') > -1 ||
-              window.location.href.indexOf('assets') > -1 ||
-              window.location.href.indexOf('classes') > -1) {
-                href = '../modules/'
-          }
-          if (package) {
-            if (key === 'Overview') {
-              // If this is the key, we use a simpler page structure
-              href += `${package.substr(1)}.html`
-            } else {
-              href += `${package.substr(1)}_${sanitizeModuleName(key)}.html`
-            }
-          } else {
-            href += `${sanitizeModuleName(key)}.html`
-          }
-          html += `<a href='${href}'>${key}</a>`
+    if (typeof obj[key] === 'object') {
+      html += renderSimpleHTMLRecursive(
+        obj[key],
+        package + '_' + key,
+        spacing + '&emsp;',
+      );
+    } else {
+      if (shownPackages.indexOf(package) === -1) {
+        html += '<div>' + package.replace(/_/g, '/') + '</div>';
+        shownPackages.push(package);
       }
+      var href = '';
+      if (window.location.href.indexOf('modules') == -1) {
+        href = 'modules/';
+      }
+      if (
+        window.location.href.indexOf('assets') > -1 ||
+        window.location.href.indexOf('classes') > -1 ||
+        window.location.href.indexOf('enums') > -1 ||
+        window.location.href.indexOf('interfaces') > -1
+      ) {
+        href = '../modules/';
+      }
+      if (window.location.href.indexOf('modules') > -1) {
+        href = '../modules/' + href;
+      }
+      if (package) {
+        if (key === 'Overview') {
+          href += '_' + package.substr(1) + '_.html';
+        } else {
+          href +=
+            '_' + package.substr(1) + '_' + sanitizeModuleName(key) + '_.html';
+        }
+      } else {
+        href += '_' + sanitizeModuleName(key) + '_.html';
+      }
+      html += '<a href=\'' + href + '\'>' + key + '</a>';
+    }
   }
-  return html
+  return html;
 }
 
 function renderHTMLRecursive(obj: object, package: string = '', spacing: string = '&emsp;'): string {
-    let html = ''
-    const shownPackages = []
-    for (const key of Object.keys(obj)) {
-        if (typeof obj[key] == 'object') {
-            // is an object
-            html += renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;')
-        } else {
-            if (shownPackages.indexOf(package) === -1) {
-                html += `<div>${package.replace(/_/g, '/').substr(1)}</div>`
-                shownPackages.push(package)
-            }
-            let href = ''
-            if (obj[key].indexOf('/') === -1) {
-              // If the user provides a simple string, like
-              // "Overview": "module_name"
-              // It will navigate to "modules/module_name.html"
-              href = 'modules/'
+  let html = '';
+  const shownPackages = [];
+  for (const key of Object.keys(obj)) {
+    if (typeof obj[key] == 'object') {
+      // is an object
+      html += renderHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;');
+    } else {
+      if (shownPackages.indexOf(package) === -1) {
+        html += `<div>${package.replace(/_/g, '/').substr(1)}</div>`;
+        shownPackages.push(package);
+      }
+      let href = '';
+      if (obj[key].indexOf('/') === -1) {
+        // If the user provides a simple string, like
+        // "Overview": "module_name"
+        // It will navigate to "modules/module_name.html"
+        href = 'modules/';
 
-              // If the user wants a different kind of page, like
-              // "Overview": "interfaces/interface_name"
-              // This should navigate to "interfaces/interface_name.html"
-            }
-            
-            if (window.location.href.indexOf('assets') > -1 ||
-                window.location.href.indexOf('classes') > -1 ||
-                window.location.href.indexOf('enums') > -1 ||
-                window.location.href.indexOf('interfaces') > -1 ||
-                window.location.href.indexOf('modules') > -1) {
-                  // Navigate one step up
-                  href = `../${href}`
-            }
-            // Check if the user is currently on this page. If so, bold this item.
-            const pageName = href + obj[key]
-            // Remove any "../" to get a valid page file.
-            const pageNamePath = `${pageName.replace("../", '')}.html`
-            if (window.location.href.indexOf(pageNamePath) > -1) {
-              html += `<a class="selected" href='${pageName}.html'>${key}</a>`
-            } else {
-              html += `<a href='${pageName}.html'>${key}</a>`
-            }
-        }
+        // If the user wants a different kind of page, like
+        // "Overview": "interfaces/interface_name"
+        // This should navigate to "interfaces/interface_name.html"
+      }
+
+      if (
+        window.location.href.indexOf('assets') > -1 ||
+        window.location.href.indexOf('classes') > -1 ||
+        window.location.href.indexOf('enums') > -1 ||
+        window.location.href.indexOf('interfaces') > -1
+      ) {
+        href = '../modules/';
+      }
+      if (window.location.href.indexOf('modules') > -1) {
+        href = '../modules/' + href;
+      }
+      // Check if the user is currently on this page. If so, bold this item.
+      const pageName = href + obj[key];
+      // Remove any "../" to get a valid page file.
+      const pageNamePath = `${pageName.replace('../', '')}.html`;
+      if (window.location.href.indexOf(pageNamePath) > -1) {
+        html += `<a class="selected" href='${pageName}.html'>${key}</a>`;
+      } else {
+        html += `<a href='${pageName}.html'>${key}</a>`;
+      }
     }
-    return html
+  }
+  return html;
 }
 
 window.addEventListener('load', () => {
