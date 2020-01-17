@@ -23,7 +23,7 @@
     "node": ">=6"
   },
   "dependencies": {
-    "typedoc": "0.15.0"
+    "typedoc": "0.16.0"
   },
   "devDependencies": {
     "grunt": "^1.0.1",
