@@ -25,6 +25,10 @@ After you install the module, you can use this theme in a build by running:
 
 Build the plugin by running `yarn build:plugin`.
 
+After you install the module, you can use this plugin in a build by running:
+
+`typedoc --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme`
+
 ### Typedoc options
 This plugin adds additional options that can be placed in your `typedoc.json` file.
 
