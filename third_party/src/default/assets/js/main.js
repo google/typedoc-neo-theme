@@ -413,46 +413,46 @@ function sanitizeModuleName(moduleName) {
     return moduleName.toLowerCase().replace(/[^a-z0-9]/gi, '_');
 }
 function renderSimpleHTMLRecursive(obj, package, spacing) {
-    if (package === void 0) { package = ""; }
-    if (spacing === void 0) { spacing = "&emsp;"; }
-    var html = "";
+    if (package === void 0) { package = ''; }
+    if (spacing === void 0) { spacing = '&emsp;'; }
+    var html = '';
     var shownPackages = [];
     for (var _i = 0, _a = Object.keys(obj); _i < _a.length; _i++) {
         var key = _a[_i];
-        if (typeof obj[key] === "object") {
-            html += renderSimpleHTMLRecursive(obj[key], package + "_" + key, spacing + "&emsp;");
+        if (typeof obj[key] === 'object') {
+            html += renderSimpleHTMLRecursive(obj[key], package + '_' + key, spacing + '&emsp;');
         }
         else {
             if (shownPackages.indexOf(package) === -1) {
-                html += "<div>" + package.replace(/_/g, "/") + "</div>";
+                html += '<div>' + package.replace(/_/g, '/') + '</div>';
                 shownPackages.push(package);
             }
-            var href = "";
-            if (window.location.href.indexOf("modules") == -1) {
-                href = "modules/";
+            var href = '';
+            if (window.location.href.indexOf('modules') == -1) {
+                href = 'modules/';
             }
-            if (window.location.href.indexOf("assets") > -1 ||
-                window.location.href.indexOf("classes") > -1 ||
-                window.location.href.indexOf("enums") > -1 ||
-                window.location.href.indexOf("interfaces") > -1) {
-                href = "../modules/";
+            if (window.location.href.indexOf('assets') > -1 ||
+                window.location.href.indexOf('classes') > -1 ||
+                window.location.href.indexOf('enums') > -1 ||
+                window.location.href.indexOf('interfaces') > -1) {
+                href = '../modules/';
             }
-            if (window.location.href.indexOf("modules") > -1) {
-                href = "../modules/" + href;
+            if (window.location.href.indexOf('modules') > -1) {
+                href = '../modules/' + href;
             }
             if (package) {
-                if (key === "Overview") {
-                    href += "_" + package.substr(1) + "_.html";
+                if (key === 'Overview') {
+                    href += '_' + package.substr(1) + '_.html';
                 }
                 else {
                     href +=
-                        "_" + package.substr(1) + "_" + sanitizeModuleName(key) + "_.html";
+                        '_' + package.substr(1) + '_' + sanitizeModuleName(key) + '_.html';
                 }
             }
             else {
-                href += "_" + sanitizeModuleName(key) + "_.html";
+                href += '_' + sanitizeModuleName(key) + '_.html';
             }
-            html += "<a href='" + href + "'>" + key + "</a>";
+            html += '<a href=\'' + href + '\'>' + key + '</a>';
         }
     }
     return html;
@@ -473,20 +473,20 @@ function renderHTMLRecursive(obj, package, spacing) {
                 shownPackages.push(package);
             }
             var href = '';
-            if (obj[key].indexOf("/") === -1) {
-                href = "modules/";
+            if (obj[key].indexOf('/') === -1) {
+                href = 'modules/';
             }
-            if (window.location.href.indexOf("assets") > -1 ||
-                window.location.href.indexOf("classes") > -1 ||
-                window.location.href.indexOf("enums") > -1 ||
-                window.location.href.indexOf("interfaces") > -1) {
-                href = "../modules/";
+            if (window.location.href.indexOf('assets') > -1 ||
+                window.location.href.indexOf('classes') > -1 ||
+                window.location.href.indexOf('enums') > -1 ||
+                window.location.href.indexOf('interfaces') > -1) {
+                href = '../modules/';
             }
-            if (window.location.href.indexOf("modules") > -1) {
-                href = "../modules/" + href;
+            if (window.location.href.indexOf('modules') > -1) {
+                href = '../modules/' + href;
             }
             var pageName = href + obj[key];
-            var pageNamePath = pageName.replace("../", "") + ".html";
+            var pageNamePath = pageName.replace('../', '') + ".html";
             if (window.location.href.indexOf(pageNamePath) > -1) {
                 html += "<a class=\"selected\" href='" + pageName + ".html'>" + key + "</a>";
             }
