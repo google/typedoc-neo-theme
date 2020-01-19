@@ -29,6 +29,10 @@ After you install the module, you can use this plugin in a build by running:
 
 `typedoc --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme`
 
+Alternatively it can be partially placed in the typedoc options:
+
+`typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default`
+
 ### Typedoc options
 This plugin adds additional options that can be placed in your `typedoc.json` file.
 
