@@ -428,17 +428,17 @@ function renderSimpleHTMLRecursive(obj, package, spacing) {
                 shownPackages.push(package);
             }
             var href = '';
-            if (window.location.href.indexOf('modules') == -1) {
+            if (window.location.href.indexOf('/modules/') == -1) {
                 href = 'modules/';
             }
-            if (window.location.href.indexOf('assets') > -1 ||
-                window.location.href.indexOf('classes') > -1 ||
-                window.location.href.indexOf('enums') > -1 ||
-                window.location.href.indexOf('interfaces') > -1) {
+            if (window.location.href.indexOf('/assets/') > -1 ||
+                window.location.href.indexOf('/classes/') > -1 ||
+                window.location.href.indexOf('/enums/') > -1 ||
+                window.location.href.indexOf('/interfaces/') > -1) {
                 href = '../modules/';
             }
-            if (window.location.href.indexOf('modules') > -1) {
-                href = '../modules/' + href;
+            if (window.location.href.indexOf('/modules/') > -1) {
+                href = '../' + href;
             }
             if (package) {
                 if (key === 'Overview') {
@@ -476,14 +476,14 @@ function renderHTMLRecursive(obj, package, spacing) {
             if (obj[key].indexOf('/') === -1) {
                 href = 'modules/';
             }
-            if (window.location.href.indexOf('assets') > -1 ||
-                window.location.href.indexOf('classes') > -1 ||
-                window.location.href.indexOf('enums') > -1 ||
-                window.location.href.indexOf('interfaces') > -1) {
+            if (window.location.href.indexOf('/assets/') > -1 ||
+                window.location.href.indexOf('/classes/') > -1 ||
+                window.location.href.indexOf('/enums/') > -1 ||
+                window.location.href.indexOf('/interfaces/') > -1) {
                 href = '../modules/';
             }
-            if (window.location.href.indexOf('modules') > -1) {
-                href = '../modules/' + href;
+            if (window.location.href.indexOf('/modules/') > -1) {
+                href = '../' + href;
             }
             var pageName = href + obj[key];
             var pageNamePath = pageName.replace('../', '') + ".html";

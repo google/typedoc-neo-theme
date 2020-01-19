@@ -19,19 +19,19 @@
 // For compatibility
 // https://stackoverflow.com/questions/36713651/typescript-array-from-error-ts2339-property-from-does-not-exist-on-type
 interface ArrayConstructor {
-    from(arrayLike: any, mapFn?, thisArg?): Array<any>;
+  from(arrayLike: any, mapFn?, thisArg?): Array<any>;
 }
 
 // https://codereview.stackexchange.com/questions/166160/convert-an-array-to-a-nested-object
 function arrayToNest(array: Array<string>): object {
-    let res: object = {}
-    for(let i: number = array.length - 1; i >= 0 ; i--) {
-        if(i == array.length - 1)
-          res = { [array[i]] : array[i]}; // assign the value
-        else
-          res = { [array[i]] : res}; // put the prev object
-    }
-    return res
+  let res: object = {}
+  for (let i: number = array.length - 1; i >= 0; i--) {
+    if (i == array.length - 1)
+      res = { [array[i]]: array[i] }; // assign the value
+    else
+      res = { [array[i]]: res }; // put the prev object
+  }
+  return res
 }
 
 /*
@@ -39,28 +39,28 @@ function arrayToNest(array: Array<string>): object {
 * https://stackoverflow.com/questions/171251/how-can-i-merge-properties-of-two-javascript-objects-dynamically
 */
 function mergeRecursive(obj1: object, obj2: object): object {
-    for (const p in obj2) {
-      try {
-        // Property in destination object set; update its value.
-        if (obj2[p].constructor == Object) {
-          if (obj1[p].constructor !== Object) {
-            // Convert string value to object value
-            // Store top-level values as 'Overview'
-            obj1[p] = {
-              Overview: obj1[p]
-            }
+  for (const p in obj2) {
+    try {
+      // Property in destination object set; update its value.
+      if (obj2[p].constructor == Object) {
+        if (obj1[p].constructor !== Object) {
+          // Convert string value to object value
+          // Store top-level values as 'Overview'
+          obj1[p] = {
+            Overview: obj1[p]
           }
-          obj1[p] = mergeRecursive(obj1[p], obj2[p]);
-
-        } else {
-          obj1[p] = obj2[p];
         }
-      } catch(e) {
-        // Property in destination object not set; create it and set its value.
+        obj1[p] = mergeRecursive(obj1[p], obj2[p]);
+
+      } else {
         obj1[p] = obj2[p];
       }
+    } catch (e) {
+      // Property in destination object not set; create it and set its value.
+      obj1[p] = obj2[p];
     }
-    return obj1;
+  }
+  return obj1;
 }
 
 /**
@@ -94,19 +94,19 @@ function renderSimpleHTMLRecursive(
         shownPackages.push(package);
       }
       var href = '';
-      if (window.location.href.indexOf('modules') == -1) {
+      if (window.location.href.indexOf('/modules/') == -1) {
         href = 'modules/';
       }
       if (
-        window.location.href.indexOf('assets') > -1 ||
-        window.location.href.indexOf('classes') > -1 ||
-        window.location.href.indexOf('enums') > -1 ||
-        window.location.href.indexOf('interfaces') > -1
+        window.location.href.indexOf('/assets/') > -1 ||
+        window.location.href.indexOf('/classes/') > -1 ||
+        window.location.href.indexOf('/enums/') > -1 ||
+        window.location.href.indexOf('/interfaces/') > -1
       ) {
         href = '../modules/';
       }
-      if (window.location.href.indexOf('modules') > -1) {
-        href = '../modules/' + href;
+      if (window.location.href.indexOf('/modules/') > -1) {
+        href = '../' + href;
       }
       if (package) {
         if (key === 'Overview') {
@@ -149,15 +149,15 @@ function renderHTMLRecursive(obj: object, package: string = '', spacing: string 
       }
 
       if (
-        window.location.href.indexOf('assets') > -1 ||
-        window.location.href.indexOf('classes') > -1 ||
-        window.location.href.indexOf('enums') > -1 ||
-        window.location.href.indexOf('interfaces') > -1
+        window.location.href.indexOf('/assets/') > -1 ||
+        window.location.href.indexOf('/classes/') > -1 ||
+        window.location.href.indexOf('/enums/') > -1 ||
+        window.location.href.indexOf('/interfaces/') > -1
       ) {
         href = '../modules/';
       }
-      if (window.location.href.indexOf('modules') > -1) {
-        href = '../modules/' + href;
+      if (window.location.href.indexOf('/modules/') > -1) {
+        href = '../' + href;
       }
       // Check if the user is currently on this page. If so, bold this item.
       const pageName = href + obj[key];
@@ -187,14 +187,14 @@ window.addEventListener('load', () => {
     const modules = document.querySelectorAll(filter) as NodeListOf<HTMLAnchorElement>
     const hierarchy = {}
     Array.from(modules).forEach(m => {
-        const packageArr = m.innerText.split('/');
-        const nestedArr = arrayToNest(packageArr);
-        mergeRecursive(hierarchy, nestedArr)
+      const packageArr = m.innerText.split('/');
+      const nestedArr = arrayToNest(packageArr);
+      mergeRecursive(hierarchy, nestedArr)
     })
     const listItemFilter = '.tsd-navigation .tsd-kind-external-module'
     const listItems = document.querySelectorAll(listItemFilter) as NodeListOf<HTMLElement>
     Array.from(listItems).forEach(el => {
-        el.remove()
+      el.remove()
     })
     const navigationFilter = '.tsd-navigation ul'
     document.querySelector(navigationFilter).innerHTML += renderSimpleHTMLRecursive(hierarchy)
