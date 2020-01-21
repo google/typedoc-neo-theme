@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+let { ParameterType } = require('typedoc/dist/lib/utils/options/declaration');
 let plugin = require('./bin/default/plugin')
 module.exports = (PluginHost) => {
   const app = PluginHost.owner
@@ -23,14 +24,14 @@ module.exports = (PluginHost) => {
    *    url: string
    *  }
    */
-  app.options.addDeclaration({ name: 'links', type: 'Array' })
+  app.options.addDeclaration({ name: 'links', type: ParameterType.Mixed })
   /*
    * Expected array:
    *  interface Outline {
    *    [key: string]: string | Outline
    *  }
    */
-  app.options.addDeclaration({ name: 'outline', type: 'Array' })
+  app.options.addDeclaration({ name: 'outline', type: ParameterType.Mixed })
   /*
    * Expected array:
    *  interface Search {
@@ -38,7 +39,7 @@ module.exports = (PluginHost) => {
    *    subtitle: string
    *  }
    */
-  app.options.addDeclaration({ name: 'search', type: 'Array' })
+  app.options.addDeclaration({ name: 'search', type: ParameterType.Mixed })
   /*
    * Expected array:
       interface Source {
@@ -47,7 +48,7 @@ module.exports = (PluginHost) => {
         // Becomes https://github.com/actions-on-google/actions-on-google-nodejs/blob/master/src/assistant.ts#L1
       }
    */
-  app.options.addDeclaration({ name: 'source', type: 'Array' })
+  app.options.addDeclaration({ name: 'source', type: ParameterType.Mixed })
 
   app.converter.addComponent('neo-theme', plugin.ExternalModuleMapPlugin)
 }
