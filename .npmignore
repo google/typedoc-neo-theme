@@ -4,5 +4,4 @@
 git-presubmit-linter/
 scripts/
 resources/
-.changelog
 cloudbuild.yaml
