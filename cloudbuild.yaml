@@ -1,10 +1,11 @@
 steps:
-- name: 'gcr.io/cloud-builders/npm'
+- name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['test']
-- name: 'gcr.io/cloud-builders/npm'
-  args: ['pack']
+- name: 'gcr.io/cloud-builders/yarn'
+  args: ['test:ci']
+- name: 'gcr.io/cloud-builders/yarn'
+  entrypoint: bash
+  args: ['./scripts/git-presubmit-linter.bash']
 artifacts:
   objects:
     # Store generated files in a Cloud Storage bucket with the commit hash as directory
