@@ -28,6 +28,9 @@ else
     cd ../
 fi
 
+# Run "Filepath exists"
+cat README.md | ./rules/path-exists.sh --allow-redirects
+
 # Run "Verify package contents"
 TAR=$(yarn pack | grep -Eo "/.*tgz")
 tar -tf "${TAR}" | ./git-presubmit-linter/tools/filelist.sh ./scripts/expected-files.txt " "
