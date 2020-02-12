@@ -29,7 +29,7 @@ else
 fi
 
 # Run "Filepath exists"
-cat README.md | ./rules/path-exists.sh --allow-redirects
+cat README.md | ./git-presubmit-linter/rules/path-exists.sh --allow-redirects
 
 # Run "Verify package contents"
 TAR=$(yarn pack | grep -Eo "/.*tgz")
