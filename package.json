@@ -40,6 +40,9 @@
     "sass": "^1.23.3",
     "typescript": "^3.0.0"
   },
+  "resolutions": {
+    "typedoc/marked": "0.7.0"
+  },
   "keywords": [
     "typescript",
     "documentation",
