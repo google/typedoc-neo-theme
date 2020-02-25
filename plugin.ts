@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { Component, ConverterComponent } from 'typedoc/dist/lib/converter/components'
+import {
+    Component,
+    ConverterComponent,
+} from 'typedoc/dist/lib/converter/components'
 
 /**
  * Empty plugin which is used in conjunction with additional typedoc options
  *
- * Based on https://github.com/christopherthielen/typedoc-plugin-external-module-name
+ * Based on
+ * https://github.com/christopherthielen/typedoc-plugin-external-module-name
  */
 @Component({ name: 'neo-theme' })
 export class ExternalModuleMapPlugin extends ConverterComponent {

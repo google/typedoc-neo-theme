@@ -5,7 +5,7 @@
  * @return     The serialized string.
  */
 export function json(json: Object | string): string {
-    if (typeof json === "string") {
+    if (typeof json === 'string') {
         console.warn('Warning - Type is string, not object:', json)
         return json
     }
