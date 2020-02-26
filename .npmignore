@@ -5,3 +5,4 @@ git-presubmit-linter/
 scripts/
 resources/
 cloudbuild.yaml
+tslint.json
