@@ -118,10 +118,10 @@ function renderSimpleHTMLRecursive(
       }
       if (package) {
         if (key === 'Overview') {
-          href += '_' + package.substr(1) + '_.html'
+          href += '_' + sanitizeModuleName(package.substr(1)) + '_.html';
         } else {
           href +=
-            '_' + package.substr(1) + '_' + sanitizeModuleName(key) + '_.html'
+            '_' + sanitizeModuleName(package.substr(1)) + '_' + sanitizeModuleName(key) + '_.html';
         }
       } else {
         href += '_' + sanitizeModuleName(key) + '_.html'
@@ -161,12 +161,10 @@ function renderHTMLRecursive(obj: object, package = '', spacing = '&emsp;'):
         window.location.href.indexOf('/assets/') > -1 ||
         window.location.href.indexOf('/classes/') > -1 ||
         window.location.href.indexOf('/enums/') > -1 ||
-        window.location.href.indexOf('/interfaces/') > -1
+        window.location.href.indexOf('/interfaces/') > -1 ||
+        window.location.href.indexOf('/modules/') > -1
       ) {
-        href = '../modules/'
-      }
-      if (window.location.href.indexOf('/modules/') > -1) {
-        href = '../' + href
+        href = '../' + href;
       }
       // Check if the user is currently on this page. If so, bold this item.
       const pageName = href + obj[key]
