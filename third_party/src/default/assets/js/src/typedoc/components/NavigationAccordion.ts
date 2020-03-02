@@ -110,10 +110,10 @@ function renderSimpleHTMLRecursive(
       }
       if (package) {
         if (key === 'Overview') {
-          href += '_' + package.substr(1) + '_.html';
+          href += '_' + sanitizeModuleName(package.substr(1)) + '_.html';
         } else {
           href +=
-            '_' + package.substr(1) + '_' + sanitizeModuleName(key) + '_.html';
+            '_' + sanitizeModuleName(package.substr(1)) + '_' + sanitizeModuleName(key) + '_.html';
         }
       } else {
         href += '_' + sanitizeModuleName(key) + '_.html';
