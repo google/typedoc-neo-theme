@@ -114,7 +114,7 @@ function renderSimpleHTMLRecursive(
         href = '../modules/'
       }
       if (window.location.href.indexOf('/modules/') > -1) {
-        href = `../${href}`
+        href = `../modules/${href}`
       }
       if (package) {
         if (key === 'Overview') {
