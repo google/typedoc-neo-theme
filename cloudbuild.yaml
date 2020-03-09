@@ -1,24 +1,32 @@
 steps:
-- name: 'gcr.io/cloud-builders/yarn'
+- id: Install dependencies
+  name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
-- name: 'gcr.io/cloud-builders/yarn'
+- id: Run lint on project source
+  name: 'gcr.io/cloud-builders/yarn'
   args: ['lint']
-- name: 'gcr.io/cloud-builders/yarn'
+- id: Run CI tests
+  name: 'gcr.io/cloud-builders/yarn'
   args: ['test:ci']
-- name: 'gcr.io/cloud-builders/yarn'
+- id: Presubmit Linter
+  name: 'gcr.io/cloud-builders/yarn'
   entrypoint: bash
   args: ['./scripts/git-presubmit-linter.bash']
 # Integration tests
-- name: 'gcr.io/cloud-builders/yarn'
+- id: Install test project dependencies
+  name: 'gcr.io/cloud-builders/yarn'
   args: ['install']
   dir: 'test'
-- name: 'gcr.io/cloud-builders/yarn'
-  args: ['install', '../*.tgz'] # Install locally generated package
+- id: Install locally generated package
+  name: 'gcr.io/cloud-builders/yarn'
+  args: ['add', '../*.tgz'] # Install locally generated package
   dir: 'test'
-- name: 'gcr.io/cloud-builders/yarn'
+- id: Generate test project docs
+  name: 'gcr.io/cloud-builders/yarn'
   args: ['docs']
   dir: 'test'
-- name: 'gcr.io/cloud-builders.yarn'
+- id: Compare generated docs to expectation
+  name: 'gcr.io/cloud-builders.yarn'
   args: ['./compare.sh']
   entrypoint: bash
   dir: 'test'
