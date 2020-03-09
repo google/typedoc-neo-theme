@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">= 8.16.2"
+    "node": "10"
   },
   "scripts": {
     "build": "tsc",
