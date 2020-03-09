@@ -95,7 +95,7 @@ graceful-fs@^4.1.6, graceful-fs@^4.2.0:
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.3.tgz#4a12ff1b60376ef09862c2093edd908328be8423"
   integrity sha512-a30VEBm4PEdx1dRB7MFK7BejejvCvBronbLjht+sHuGYj8PHs7M/5Z+rt5lw551vZ7yfTCj4Vuyy3mSJytDWRQ==
 
-handlebars@^4.5.3, handlebars@^4.7.0:
+handlebars@^4.1.2, handlebars@^4.5.3, handlebars@^4.7.0:
   version "4.7.3"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.7.3.tgz#8ece2797826886cf8082d1726ff21d2a022550ee"
   integrity sha512-SRGwSYuNfx8DwHD/6InAPzD6RgeruWLT+B8e8a7gGs8FWgHzlExpTFMEq2IA6QpAfOClpKHy6+8IqTjeBCu6Kg==
@@ -106,7 +106,7 @@ handlebars@^4.5.3, handlebars@^4.7.0:
   optionalDependencies:
     uglify-js "^3.1.4"
 
-highlight.js@^9.16.2, highlight.js@^9.17.1:
+highlight.js@^9.15.8, highlight.js@^9.16.2, highlight.js@^9.17.1:
   version "9.18.1"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.18.1.tgz#ed21aa001fe6252bb10a3d76d47573c6539fe13c"
   integrity sha512-OrVKYz70LHsnCgmbXctv/bfuvntIKDz177h0Co37DQ5jamGZLVmoCVMtjMtNZY3X9DrCcKfklHPNeA0uPZhSJg==
@@ -155,11 +155,6 @@ marked@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/marked/-/marked-0.7.0.tgz#b64201f051d271b1edc10a04d1ae9b74bb8e5c0e"
   integrity sha512-c+yYdCZJQrsRjTPhUx7VKkApw9bwDkNbHUKo1ovgcfDjb2kc8rLuRbIFyXL5WOEUwzSSKo3IXpph2K6DqB/KZg==
-
-marked@^0.8.0:
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/marked/-/marked-0.8.0.tgz#ec5c0c9b93878dc52dd54be8d0e524097bd81a99"
-  integrity sha512-MyUe+T/Pw4TZufHkzAfDj6HarCBWia2y27/bhuYkTaiUnfDYFnCP3KUN+9oM7Wi6JA2rymtVYbQu3spE0GCmxQ==
 
 minimatch@^3.0.0, minimatch@^3.0.4:
   version "3.0.4"
@@ -236,6 +231,16 @@ source-map@^0.6.1, source-map@~0.6.1:
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
 
+typedoc-default-themes@^0.6.0:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.6.3.tgz#c214ce5bbcc6045558448a8fd422b90e3e9b6782"
+  integrity sha512-rouf0TcIA4M2nOQFfC7Zp4NEwoYiEX4vX/ZtudJWU9IHA29MPC+PPgSXYLPESkUo7FuB//GxigO3mk9Qe1xp3Q==
+  dependencies:
+    backbone "^1.4.0"
+    jquery "^3.4.1"
+    lunr "^2.3.8"
+    underscore "^1.9.1"
+
 typedoc-default-themes@^0.7.0:
   version "0.7.2"
   resolved "https://registry.yarnpkg.com/typedoc-default-themes/-/typedoc-default-themes-0.7.2.tgz#1e9896f920b58e6da0bba9d7e643738d02405a5a"
@@ -246,10 +251,46 @@ typedoc-default-themes@^0.7.0:
     lunr "^2.3.8"
     underscore "^1.9.1"
 
-"typedoc-neo-theme@file:..":
-  version "1.0.6"
+typedoc-neo-theme@../typedoc-neo-theme-1.0.4.tgz:
+  version "1.0.4"
+  resolved "../typedoc-neo-theme-1.0.4.tgz#78e70d2d7fca692dd830c4fbb5ba9a0b745440aa"
+  dependencies:
+    typedoc "0.15.0"
+
+typedoc-neo-theme@../typedoc-neo-theme-v1.0.4.tgz:
+  version "1.0.4"
+  resolved "../typedoc-neo-theme-v1.0.4.tgz#b17ba905e47301e3db7f659159bd5ba58ecc9295"
+  dependencies:
+    typedoc "0.15.0"
+
+typedoc-neo-theme@../typedoc-neo-theme-v1.0.5.tgz:
+  version "1.0.5"
+  resolved "../typedoc-neo-theme-v1.0.5.tgz#e461f2577cb4f2d32ffdf78672cbc9c3893d12ae"
   dependencies:
     typedoc "0.16.0"
+
+typedoc-neo-theme@../typedoc-neo-theme-v1.0.6.tgz:
+  version "1.0.6"
+  resolved "../typedoc-neo-theme-v1.0.6.tgz#a0280572277fb98ed89fd2ebf208e4e3239744ef"
+  dependencies:
+    typedoc "0.16.0"
+
+typedoc@0.15.0:
+  version "0.15.0"
+  resolved "https://registry.yarnpkg.com/typedoc/-/typedoc-0.15.0.tgz#21eaf4db41cf2797bad027a74f2a75cd08ae0c2d"
+  integrity sha512-NOtfq5Tis4EFt+J2ozhVq9RCeUnfEYMFKoU6nCXCXUULJz1UQynOM+yH3TkfZCPLzigbqB0tQYGVlktUWweKlw==
+  dependencies:
+    "@types/minimatch" "3.0.3"
+    fs-extra "^8.1.0"
+    handlebars "^4.1.2"
+    highlight.js "^9.15.8"
+    lodash "^4.17.15"
+    marked "^0.7.0"
+    minimatch "^3.0.0"
+    progress "^2.0.3"
+    shelljs "^0.8.3"
+    typedoc-default-themes "^0.6.0"
+    typescript "3.5.x"
 
 typedoc@0.16.0:
   version "0.16.0"
@@ -267,6 +308,11 @@ typedoc@0.16.0:
     shelljs "^0.8.3"
     typedoc-default-themes "^0.7.0"
     typescript "3.7.x"
+
+typescript@3.5.x:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
+  integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
 
 typescript@3.7.x, typescript@~3.7.0:
   version "3.7.5"
