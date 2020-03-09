@@ -17,12 +17,9 @@ steps:
   name: 'gcr.io/cloud-builders/yarn:current'
   args: ['install']
   dir: 'test'
-- id: LS
-  name: 'gcr.io/cloud-builders/yarn:current'
-  entrypoint: 'ls'
 - id: Install locally generated package
   name: 'gcr.io/cloud-builders/yarn:current'
-  args: ['add', './../typedoc-neo-theme-v1.0.6.tgz'] # Install locally generated package
+  args: ['add', './../typedoc-neo-theme-v*.tgz'] # Install locally generated package
   dir: 'test'
 - id: Generate test project docs
   name: 'gcr.io/cloud-builders/yarn:current'
