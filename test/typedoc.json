@@ -1,0 +1,18 @@
+{
+  "out": "docs",
+  "ignoreCompilerErrors": true,
+  "disableOutputCheck": true,
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeNotExported": true,
+  "links": [{
+    "label": "Theme",
+    "url": "https://github.com/google/typedoc-neo-theme"
+  }],
+  "outline": [],
+  "search": [],
+  "source": [{
+    "path": "https://github.com/google/typedoc-neo-theme/blob/master/test/src/",
+    "line": "L"
+  }]
+}

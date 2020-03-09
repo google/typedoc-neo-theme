@@ -1,0 +1,21 @@
+{
+  "name": "typedoc-neo-theme",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": ">=6.13.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "docs": "typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default"
+  },
+  "devDependencies": {
+    "@gerrit0/typedoc": "^0.15.0",
+    "typedoc-neo-theme": "file:../typedoc-neo-theme-v1.0.6.tgz",
+    "typescript": "~3.7.0"
+  }
+}

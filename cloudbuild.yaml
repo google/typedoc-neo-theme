@@ -8,6 +8,20 @@ steps:
 - name: 'gcr.io/cloud-builders/yarn'
   entrypoint: bash
   args: ['./scripts/git-presubmit-linter.bash']
+# Integration tests
+- name: 'gcr.io/cloud-builders/yarn'
+  args: ['install']
+  dir: 'test'
+- name: 'gcr.io/cloud-builders/yarn'
+  args: ['install', '../*.tgz'] # Install locally generated package
+  dir: 'test'
+- name: 'gcr.io/cloud-builders/yarn'
+  args: ['docs']
+  dir: 'test'
+- name: 'gcr.io/cloud-builders.yarn'
+  args: ['./compare.sh']
+  entrypoint: bash
+  dir: 'test'
 artifacts:
   objects:
     # Store generated files in a Cloud Storage bucket with the commit hash as directory
