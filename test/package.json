@@ -1,5 +1,5 @@
 {
-  "name": "typedoc-neo-theme",
+  "name": "typedoc-neo-theme-test",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -7,7 +7,7 @@
   "license": "Apache-2.0",
   "author": "Google Inc.",
   "engines": {
-    "node": ">=8.16.2"
+    "node": ">=6"
   },
   "scripts": {
     "build": "tsc",
@@ -15,7 +15,6 @@
   },
   "devDependencies": {
     "@gerrit0/typedoc": "^0.15.0",
-    "typedoc-neo-theme": "file:../typedoc-neo-theme-v1.0.6.tgz",
     "typescript": "~3.7.0"
   }
 }
