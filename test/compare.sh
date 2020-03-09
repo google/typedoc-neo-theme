@@ -17,22 +17,6 @@ set -e
 
 # Get every 'expected/' file and compare it against the newly-generated files
 # that are in 'docs/'
-# DIRECTORIES=(
-#     "expected"
-# )
-
-# for dir in "${DIRECTORIES[@]}"
-# do
-#     echo "~ ${dir} ~"
-#     cd ${dir}
-#     for entry in *
-#     do
-#         if [ -f "${entry}" ]; then
-#             echo "${entry}"
-#         fi
-#     done
-# done
-
 FILES=()
 while IFS=  read -r -d $'\0'; do
     FILES+=("$REPLY")
