@@ -19,8 +19,5 @@
   },
   "resolutions": {
     "typedoc/marked": "0.7.0"
-  },
-  "dependencies": {
-    "typedoc-neo-theme": "../typedoc-neo-theme-v1.0.6.tgz"
   }
 }
