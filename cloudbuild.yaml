@@ -19,7 +19,7 @@ steps:
   dir: 'test'
 - id: Install locally generated package
   name: 'gcr.io/cloud-builders/yarn'
-  args: ['add', '../*.tgz'] # Install locally generated package
+  args: ['add', '../typedoc-*.tgz'] # Install locally generated package
   dir: 'test'
 - id: Generate test project docs
   name: 'gcr.io/cloud-builders/yarn'
