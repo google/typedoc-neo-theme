@@ -14,7 +14,7 @@
     "docs": "typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default"
   },
   "devDependencies": {
-    "@gerrit0/typedoc": "^0.15.0",
+    "typedoc": "0.16.0",
     "typescript": "~3.7.0"
   },
   "resolutions": {
