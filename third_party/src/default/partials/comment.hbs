@@ -7,27 +7,11 @@
             {{~#if text~}}
                 {{#markdown}}{{{text}}}{{/markdown}}
             {{~/if~}}
-            {{~#if tags~}}
-                <dl class="tsd-comment-tags">
-                    {{~#each tags~}}
-                        <dt>{{tagName}}</dt>
-                        <dd>{{#markdown}}{{{text}}}{{/markdown}}</dd>
-                    {{~/each~}}
-                </dl>
-            {{~/if~}}
         </div>
     {{~/if~}}
     {{~#if text~}}
         <div class="tsd-comment tsd-typography tsd-comment-text">
             {{#markdown}}{{{text}}}{{/markdown}}
-            {{~#if tags~}}
-                <dl class="tsd-comment-tags">
-                    {{~#each tags~}}
-                        <dt>{{tagName}}</dt>
-                        <dd>{{#markdown}}{{{text}}}{{/markdown}}</dd>
-                    {{~/each~}}
-                </dl>
-            {{~/if~}}
         </div>
     {{~/if~}}
     {{~#if tags~}}
