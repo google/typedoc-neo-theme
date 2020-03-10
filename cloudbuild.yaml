@@ -19,6 +19,7 @@ steps:
   dir: 'test'
 - id: Install locally generated package
   name: 'gcr.io/cloud-builders/yarn:current'
+  # This value needs to change on every version update
   args: ['add', './../typedoc-neo-theme-v1.0.6.tgz'] # Install locally generated package
   dir: 'test'
 - id: Generate test project docs
@@ -26,7 +27,7 @@ steps:
   args: ['docs']
   dir: 'test'
 - id: Compare generated docs to expectation
-  name: 'gcr.io/cloud-builders.yarn:current'
+  name: 'gcr.io/cloud-builders/yarn:current'
   args: ['./compare.sh']
   entrypoint: bash
   dir: 'test'
