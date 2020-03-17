@@ -1,0 +1,23 @@
+{
+  "name": "typedoc-neo-theme-test",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": "Google Inc.",
+  "engines": {
+    "node": "10"
+  },
+  "scripts": {
+    "build": "tsc",
+    "docs": "typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default"
+  },
+  "devDependencies": {
+    "typedoc": "0.15.0",
+    "typescript": "~3.7.0"
+  },
+  "resolutions": {
+    "typedoc/marked": "0.7.0"
+  }
+}

@@ -11,3 +11,4 @@ third_party/src/default/**/*.js
 # Continuous integration
 git-presubmit-linter/
 *.tgz
+test/docs
