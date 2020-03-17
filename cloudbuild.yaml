@@ -20,7 +20,7 @@ steps:
 - id: Install locally generated package
   name: 'gcr.io/cloud-builders/yarn:current'
   # This value needs to change on every version update
-  args: ['add', './../typedoc-neo-theme-v1.0.6.tgz'] # Install locally generated package
+  args: ['add', './../typedoc-neo-theme-v1.0.7.tgz'] # Install locally generated package
   dir: 'test'
 - id: Generate test project docs
   name: 'gcr.io/cloud-builders/yarn:current'
