@@ -1,35 +1,41 @@
 steps:
 - id: Install dependencies
-  name: 'gcr.io/cloud-builders/yarn:current'
+  name: 'node:10.15.1'
+  entrypoint: yarn
   args: ['install']
 - id: Run lint on project source
-  name: 'gcr.io/cloud-builders/yarn:current'
+  name: 'node:10.15.1'
+  entrypoint: yarn
   args: ['lint']
 - id: Run CI tests
-  name: 'gcr.io/cloud-builders/yarn:current'
+  name: 'node:10.15.1'
+  entrypoint: yarn
   args: ['test:ci']
 - id: Presubmit Linter
-  name: 'gcr.io/cloud-builders/yarn:current'
+  name: 'node:10.15.1'
   entrypoint: bash
   args: ['./scripts/git-presubmit-linter.bash']
 # Integration tests
 - id: Install test project dependencies
-  name: 'gcr.io/cloud-builders/yarn:current'
+  name: 'node:10.15.1'
+  entrypoint: yarn
   args: ['install']
   dir: 'test'
 - id: Install locally generated package
-  name: 'gcr.io/cloud-builders/yarn:current'
+  name: 'node:10.15.1'
+  entrypoint: yarn
   # This value needs to change on every version update
   args: ['add', './../typedoc-neo-theme-v1.0.7.tgz'] # Install locally generated package
   dir: 'test'
 - id: Generate test project docs
-  name: 'gcr.io/cloud-builders/yarn:current'
+  name: 'node:10.15.1'
+  entrypoint: yarn
   args: ['docs']
   dir: 'test'
 - id: Compare generated docs to expectation
-  name: 'gcr.io/cloud-builders/yarn:current'
-  args: ['./compare.sh']
+  name: 'node:10.15.1'
   entrypoint: bash
+  args: ['./compare.sh']
   dir: 'test'
 artifacts:
   objects:
