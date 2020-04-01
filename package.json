@@ -16,8 +16,8 @@
     "lint:plugin": "tslint -p .",
     "lint:theme": "tslint third_party/src/default/assets/js/src/typedoc/**/*.ts",
     "test": "npm run test:rebuild",
-    "test:ci": "npm run test:rebuild && npm audit",
-    "test:rebuild": "npm run clean:node_modules && npm install && npm run build"
+    "test:ci": "yarn test:rebuild && yarn audit",
+    "test:rebuild": "yarn clean:node_modules && yarn && yarn build"
   },
   "author": {
     "name": "Nick Felker, based on work by Sebastian Lenz"
