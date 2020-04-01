@@ -4,6 +4,7 @@
   "version": "1.0.7",
   "main": "index.js",
   "scripts": {
+    "preinstall": "npx npm-force-resolutions",
     "clean:build": "./node_modules/.bin/rimraf bin",
     "clean:node_modules": "rm -rf ./node_modules/",
     "clean": "npm run clean:build",
@@ -41,13 +42,13 @@
     "grunt-ts": "^6.0.0-beta.22",
     "rimraf": "^2.6.1",
     "sass": "^1.23.3",
-    "tslint": "^5.9.1",
+    "tslint": "^6.1.0",
     "tslint-eslint-rules": "^5.1.0",
     "typescript": "^3.7.0"
   },
   "resolutions": {
     "typedoc/marked": "0.7.0",
-    "typedoc/handlebars/optimist/minimist": ">=1.2.3"
+    "minimist": ">=1.2.3"
   },
   "keywords": [
     "typescript",
