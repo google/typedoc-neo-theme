@@ -3,8 +3,7 @@ node_modules/
 .sass-cache/
 .tscache/
 yarn-error.log
-test/package-lock.json
-yarn.lock
+package-lock.json
 plugin.js
 /gruntfile.js
 # Hide auto-generated source files

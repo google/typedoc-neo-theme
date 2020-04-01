@@ -4,7 +4,6 @@
   "version": "1.0.7",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "clean:build": "./node_modules/.bin/rimraf bin",
     "clean:node_modules": "rm -rf ./node_modules/",
     "clean": "npm run clean:build",
