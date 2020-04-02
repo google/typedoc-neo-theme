@@ -72,7 +72,7 @@ module typedoc {
       super(options)
 
       this.$current    = this.$el.find('> ul.current')
-      this.$navigation = this.$el.parents('.menu-sticky-wrap')
+      this.$navigation = this.$el // Itself
       this.$container  = this.$el.parents('.row')
 
       this.listenTo(viewport, 'resize', this.onResize)
