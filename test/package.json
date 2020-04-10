@@ -21,6 +21,6 @@
     "typedoc/marked": "0.7.0"
   },
   "dependencies": {
-    "typedoc-neo-theme": "file:../typedoc-neo-theme-v1.0.7.tgz"
+    "typedoc-neo-theme": "file:../typedoc-neo-theme-v1.0.8.tgz"
   }
 }

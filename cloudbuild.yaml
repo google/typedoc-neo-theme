@@ -25,7 +25,7 @@ steps:
   name: 'node:10.15.1'
   entrypoint: yarn
   # This value needs to change on every version update
-  args: ['add', './../typedoc-neo-theme-v1.0.7.tgz'] # Install locally generated package
+  args: ['add', './../typedoc-neo-theme-v1.0.8.tgz'] # Install locally generated package
   dir: 'test'
 - id: Generate test project docs
   name: 'node:10.15.1'
