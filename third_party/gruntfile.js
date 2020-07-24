@@ -43,10 +43,10 @@ module.exports = function(grunt)
                 },
                 files: {
                     'bin/default/assets/js/main.js': [
+                        'node_modules/lunr/lunr.min.js', // Import Lunr from NPM
                         'third_party/src/default/assets/js/lib/jquery-2.1.1.min.js',
                         'third_party/src/default/assets/js/lib/underscore-1.6.0.min.js',
                         'third_party/src/default/assets/js/lib/backbone-1.1.2.min.js',
-                        'third_party/src/default/assets/js/lib/lunr.min.js',
                         'third_party/src/default/assets/js/main.js'
                     ]
                 }

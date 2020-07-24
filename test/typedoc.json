@@ -10,7 +10,10 @@
     "url": "https://github.com/google/typedoc-neo-theme"
   }],
   "outline": [],
-  "search": [],
+  "search": [{
+    "name": "\"index\".Example1.waitForOk",
+    "subtitle": "Main method"
+  }],
   "source": [{
     "path": "https://github.com/google/typedoc-neo-theme/blob/master/test/src/",
     "line": "L"

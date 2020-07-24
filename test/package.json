@@ -14,13 +14,13 @@
     "docs": "typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default"
   },
   "devDependencies": {
-    "typedoc": "0.15.0",
-    "typescript": "~3.7.0"
+    "typedoc": "0.17.8",
+    "typescript": "^3.9.0"
   },
   "resolutions": {
     "typedoc/marked": "0.7.0"
   },
   "dependencies": {
-    "typedoc-neo-theme": "file:../typedoc-neo-theme-v1.0.8.tgz"
+    "typedoc-neo-theme": "file:../typedoc-neo-theme-v1.0.9.tgz"
   }
 }

@@ -1,3 +1,5 @@
+/// <reference types='lunr' />
+
 declare module typedoc.search {
   interface IDocument {
     id:number
@@ -11,6 +13,7 @@ declare module typedoc.search {
   interface IData {
     kinds:{[kind:number]:string}
     rows:IDocument[]
+    index:object;
   }
 
   let data:IData
@@ -76,38 +79,6 @@ module typedoc.search {
   let resultClicked = false
 
   /**
-   * Instantiate the lunr index.
-   */
-  function createIndex() {
-    index = new lunr.Index()
-    index.pipeline.add(
-      lunr.trimmer,
-    )
-
-    index.field('name', {boost:10})
-    index.field('parent')
-    index.ref('id')
-
-    const rows   = data.rows
-    let pos    = 0
-    const length = rows.length
-    function batch() {
-      let cycles = 0
-      while (cycles++ < 100) {
-        index.add(rows[pos])
-        if (++pos === length) {
-          return setLoadingState(SearchLoadingState.Ready)
-        }
-      }
-      setTimeout(batch, 10)
-    }
-
-    batch()
-
-    initializePriorityResults()
-  }
-
-  /**
    * When the search system initializes, pull our priority results and put them
    * in an array to access later.
    */
@@ -127,24 +98,37 @@ module typedoc.search {
    * Lazy load the search index and parse it.
    */
   function loadIndex() {
-    if (loadingState !== SearchLoadingState.Idle) return
-    setTimeout(() => {
-      if (loadingState === SearchLoadingState.Idle) {
-        setLoadingState(SearchLoadingState.Loading)
-      }
-    }, 500)
+    if (loadingState != SearchLoadingState.Idle || data) return;
 
-    if (typeof data !== 'undefined') {
-      createIndex()
-    } else {
-      $.get($el.attr('data-index'))
-        .done((source:string) => {
-          eval(source)
-          createIndex()
-        }).fail(() => {
-          setLoadingState(SearchLoadingState.Failure)
-        })
+    setTimeout(() => {
+      if (loadingState == SearchLoadingState.Idle) {
+        setLoadingState(SearchLoadingState.Loading);
+      }
+    }, 500);
+
+    const url = $el.attr('data-index');
+    if (!url) {
+      setLoadingState(SearchLoadingState.Failure);
+      return;
     }
+    fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('The search index is missing');
+        }
+
+        return response.json();
+      })
+      .then((source: IData) => {
+        data = source;
+        index = lunr.Index.load(source.index);
+
+        initializePriorityResults();
+        setLoadingState(SearchLoadingState.Ready);
+      })
+      .catch((error) => {
+        setLoadingState(SearchLoadingState.Failure);
+      });
   }
 
   /**
