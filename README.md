@@ -1,6 +1,6 @@
 # Neo theme for TypeDoc
 
-[![npm](https://img.shields.io/npm/v/typedoc-neo-theme.svg)](https://www.npmjs.com/package/typedoc-neo-theme)
+[![npm](https://img.shields.io/npm/v/typedoc-loopingz-theme.svg)](https://www.npmjs.com/package/typedoc-loopingz-theme)
 
 This plugin contains a new theme for TypeDoc which focuses on improved readability and navigation.
 
@@ -8,7 +8,7 @@ Additionally, it extends Typedoc with additional options for a richer user exper
 
 ![Screenshot of external module design](./resources/screenshot-dialogflow.png)
 
-Visit the [Actions on Google Node.js reference](https://actions-on-google.github.io/actions-on-google-nodejs)
+Visit the [Webda.io documentatiion](https://loopingz.github.io/webda.io)
 to view this theme.
 
 Visit http://typedoc.org/ to learn more about TypeDoc.
@@ -19,7 +19,7 @@ Build the theme by running `yarn build:theme`.
 
 After you install the module, you can use this theme in a build by running:
 
-`typedoc --theme ./node_modules/typedoc-neo-theme/bin/default`
+`typedoc --theme ./node_modules/typedoc-loopingz-theme/bin/default`
 
 ## Plugin
 
@@ -27,14 +27,21 @@ Build the plugin by running `yarn build:plugin`.
 
 After you install the module, you can use this plugin in a build by running:
 
-`typedoc --theme ./node_modules/typedoc-neo-theme/bin/default --plugin typedoc-neo-theme`
+`typedoc --theme ./node_modules/typedoc-loopingz-theme/bin/default --plugin typedoc-loopingz-theme`
 
 Alternatively it can be partially placed in the typedoc options:
 
-`typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default`
+`typedoc --options typedoc.json --theme node_modules/typedoc-loopingz-theme/bin/default`
 
 ### Typedoc options
 This plugin adds additional options that can be placed in your `typedoc.json` file.
+
+#### Exclude Reference
+You may want to exclude Reference, you can do so by adding
+
+```json
+"excludeReferences": true
+```
 
 #### Links
 You may want to specify additional links to appear in your header that don't point to
@@ -92,13 +99,12 @@ You can set up links to your source code under each property in the documentatio
 
 ```json
 "source": [{
-  "path": "https://github.com/actions-on-google/actions-on-google-nodejs/blob/master/src/",
+  "path": "https://github.com/loopingz/webda.io/blob/master/src/",
   "line": "L"
 }]
 ```
 
-For a particular file and line, this can take you to a valid GitHub source for the
-Actions on Google Node.js project.
+For a particular file and line, this can take you to a valid GitHub source for the project.
 
 ## License
 
