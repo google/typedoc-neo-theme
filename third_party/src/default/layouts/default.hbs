@@ -18,6 +18,15 @@
         <div class="container container-main">
             <div class="row">
                 <div class="col-menu menu-sticky-wrap menu-highlight">
+                    {{#if mdPagesNavigation.children}}
+                    <nav class="tsd-navigation outline primary">
+                        <ul>
+                            {{#each mdPagesNavigation.children}}
+                            {{> navigation}}
+                            {{/each}}
+                        </ul>
+                    </nav>
+                    {{/if}}
                     {{#if settings.outline}}
                     <nav class="tsd-navigation outline primary">
                         <ul style="display:none">
