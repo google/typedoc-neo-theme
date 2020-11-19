@@ -20,21 +20,19 @@
                 <div class="col-menu menu-sticky-wrap menu-highlight">
                     {{#if settings.outline}}
                     <nav class="tsd-navigation outline primary">
-                        <a style="margin-left:0em" href="{{relativeURL "globals.html"}}">Globals</a>
                         <ul style="display:none">
                             {{json settings.outline.[0]}}
                         </ul>
                     </nav>
-                    {{else}}
-                    <nav class="tsd-navigation primary">
+                    {{/if}}
+                    <nav class="tsd-navigation root">
                         <ul>
                             {{! Globals }}
                             {{#each navigation.children}}
-                            {{> navigation}}
+                            {{> toc.root}}
                             {{/each}}
                         </ul>
                     </nav>
-                    {{/if}}
                     <nav class="tsd-navigation">
 
                         {{#if model.typeHierarchy}}

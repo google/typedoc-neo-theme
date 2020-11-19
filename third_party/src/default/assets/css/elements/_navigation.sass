@@ -42,6 +42,9 @@
     div
         font-size: 13px
 
+.tsd-navigation.root
+    border-bottom: 1px solid #666
+    margin-bottom: 5px
 
 // Primary part of the navigation containing the available modules.
 //
@@ -275,4 +278,11 @@
         content: "References"
         font-size: 13px
     ~ .tsd-kind-reference::before
+        content: none
+
+.root.tsd-kind-enum
+    &:before
+        content: "Enumerations"
+        font-size: 13px
+    ~ .tsd-kind-enum::before
         content: none

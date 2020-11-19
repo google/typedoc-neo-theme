@@ -31,7 +31,7 @@ module.exports = (PluginHost) => {
    *    [key: string]: string | Outline
    *  }
    */
-  app.options.addDeclaration({ name: 'outline', type: ParameterType.Mixed })
+  app.options.addDeclaration({ name: 'outline', type: ParameterType.Mixed, defaultValue: [] })
   /*
    * Expected array:
    *  interface Search {
