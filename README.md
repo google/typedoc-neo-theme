@@ -1,4 +1,4 @@
-# Neo theme for TypeDoc
+# Loopingz theme for TypeDoc
 
 [![npm](https://img.shields.io/npm/v/typedoc-loopingz-theme.svg)](https://www.npmjs.com/package/typedoc-loopingz-theme)
 
