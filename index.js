@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-let { ParameterType } = require('typedoc/dist/lib/utils/options/declaration');
+let { ParameterType, ReflectionKind } = require('typedoc/dist/lib/utils/options/declaration');
 let plugin = require('./bin/default/plugin')
 module.exports = (PluginHost) => {
   const app = PluginHost.owner
@@ -49,6 +49,18 @@ module.exports = (PluginHost) => {
       }
    */
   app.options.addDeclaration({ name: 'source', type: ParameterType.Mixed })
+  app.options.addDeclaration({ name: 'excludeReferences', type: ParameterType.Boolean })
 
-  app.converter.addComponent('neo-theme', plugin.ExternalModuleMapPlugin)
+  app.converter.addComponent('loopingz-theme', plugin.ExternalModuleMapPlugin)
+
+  // Remove Reference
+  app.converter.on("resolveBegin", (context) => 
+    {
+      // ReferenceKind is 16777216
+      if (app.options.getValue('excludeReferences')) {
+        for (let reflection of context.project.getReflectionsByKind(16777216)) {
+            context.project.removeReflection(reflection);
+        }
+      }
+    });
 }

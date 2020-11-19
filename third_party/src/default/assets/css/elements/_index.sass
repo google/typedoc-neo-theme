@@ -33,15 +33,17 @@
         padding: 0 20px 10px 20px
         border-bottom: 1px solid $COLOR_PANEL_DIVIDER
 
-    ul.tsd-index-list
+    div.tsd-index-list
+        display: flex
+        flex-wrap: wrap
         padding: 0
-        list-style: none
         line-height: $LINE_HEIGHT
         font-size: 13px
 
-        li
+        div
             +vendors(column-break-inside, avoid)
             +vendors(page-break-inside, avoid)
+            width: 250px
 
     a,
     .tsd-parent-kind-module a

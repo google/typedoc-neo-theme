@@ -29,20 +29,29 @@
             @content
 
 .container
-    max-width: 1200px
     margin: 0 auto
-    padding: 0 40px
+    padding: 0
 
+    div.row
+        display: flex
+        padding: 0px
+        padding-top: 0px
+        max-height: calc(100vh - 80px)
+        height: calc(100vh - 80px)
+        
     +size-xs
-        padding: 0 20px
+        padding: 0
 
 .container-main
-    padding-bottom: 200px
+    padding: 0px
+    max-height: 100vh
 
 .row
     +clearfix
-    position: relative
-    margin: 0 -10px
+    display: flex
+    padding: 0px
+    padding-top: 80px
+    max-height: calc(100vh - 80px)
 
 .col
     @extend %prevent-children-margin

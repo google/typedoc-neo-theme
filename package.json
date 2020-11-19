@@ -1,7 +1,7 @@
 {
-  "name": "typedoc-neo-theme",
+  "name": "typedoc-loopingz-theme",
   "description": "Improved theme for Typedoc",
-  "version": "1.0.10",
+  "version": "1.0.0",
   "main": "index.js",
   "scripts": {
     "clean:build": "./node_modules/.bin/rimraf bin",
@@ -20,7 +20,7 @@
     "test:rebuild": "yarn clean:node_modules && yarn && yarn build"
   },
   "author": {
-    "name": "Nick Felker, based on work by Sebastian Lenz"
+    "name": "Remi Cattiau based on Nick Felker, based on work by Sebastian Lenz"
   },
   "license": "Apache-2.0",
   "engines": {
@@ -58,10 +58,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/google/typedoc-neo-theme.git"
+    "url": "git+https://github.com/loopingz/typedoc-theme.git"
   },
   "bugs": {
-    "url": "https://github.com/google/typedoc-neo-theme/issues"
+    "url": "https://github.com/loopingz/typedoc-theme/issues"
   },
-  "homepage": "https://github.com/google/typedoc-neo-theme#readme"
+  "homepage": "https://github.com/loopingz/typedoc-theme#readme"
 }

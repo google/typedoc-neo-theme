@@ -14,8 +14,6 @@
 
 .tsd-navigation
     padding: 0 0 0 0
-    // Fill most of the available content on the page
-    height: calc(100vh - 260px)
     overflow-y: auto
 
     a
@@ -28,7 +26,7 @@
         transition: border-left-color 0.1s
         font-size: 13px
         word-break: break-word
-        margin-left: 1em
+        margin-left: 6px
 
         &:hover
             color: blue
@@ -62,7 +60,9 @@
 // </nav>
 //
 .tsd-navigation.primary
-    padding-bottom: 40px
+
+    border-bottom: 1px solid #666
+    margin-bottom: 5px
 
     a, div
         display: block
@@ -144,7 +144,17 @@
         > a
             font-weight: bold
 
+.tsd-navigation > div > .tsd-hierarchy
+    border-bottom: 1px solid #666
+    &:before
+        content: "Hierarchy"
+        font-size: 13px
 
+.tsd-navigation .tsd-hierarchy a
+    margin-left: 0
+
+.tsd-navigation .tsd-hierarchy ul
+    margin-left: 8px
 // Sticky menu setup
 //
 .menu-sticky-wrap
@@ -177,8 +187,12 @@
                 position: sticky
 
 .col-menu
-    position: fixed
-    top: 120px
+    background-color: #f0f0f0
+    box-shadow: 0 0 5px rgba(0,0,0,.35)
+    overflow-y: scroll
+    padding: 0 10px
+    min-width: 200px
+    height: calc(100vh - 80px)
 
 .secondary-menu
     margin-left: calc(83% - 50px)
@@ -192,7 +206,7 @@
 .root
     > ul
         > .tsd-parent-kind-class
-            margin-left: 16px
+            margin-left: 8px
 
         // Only apply to first element of each class
         // https://stackoverflow.com/questions/2717480/css-selector-for-first-element-with-class
@@ -200,7 +214,7 @@
             &:before
                 content: "Constructors"
                 font-size: 13px
-                margin-left: 24px
+                margin-left: 8px
             ~ .tsd-kind-constructor::before
                 content: none
 
@@ -208,7 +222,7 @@
             &:before
                 content: "Properties"
                 font-size: 13px
-                margin-left: 24px
+                margin-left: 8px
             ~ .tsd-kind-property::before
                 content: none
 
@@ -216,7 +230,7 @@
             &:before
                 content: "Accessors"
                 font-size: 13px
-                margin-left: 24px
+                margin-left: 8px
             ~ .tsd-kind-get-signature::before
                 content: none
 
@@ -224,7 +238,7 @@
             &:before
                 content: "Methods"
                 font-size: 13px
-                margin-left: 24px
+                margin-left: 8px
             ~ .tsd-kind-method::before
                 content: none
 
@@ -254,4 +268,11 @@
         content: "Functions"
         font-size: 13px
     ~ .tsd-kind-function::before
+        content: none
+
+.root.tsd-kind-reference
+    &:before
+        content: "References"
+        font-size: 13px
+    ~ .tsd-kind-reference::before
         content: none

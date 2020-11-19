@@ -15,11 +15,11 @@
     z-index: 1
     top: 0
     left: 0
-    width: 100%
     height: $TOOLBAR_HEIGHT
     color: $TOOLBAR_TEXT_COLOR
     background: $TOOLBAR_COLOR
     border-bottom: 1px solid $COLOR_PANEL_DIVIDER
+    padding: 0 20px
 
     a
         color: $TOOLBAR_TEXT_COLOR
@@ -172,8 +172,6 @@
 
 @media screen and (max-width: 900px)
     // On small devices, shift tools to the right 40px and make heading scrollable
-    .tsd-page-toolbar
-        overflow: auto
 
     .tsd-widget.search.no-caption
         right: -80px
