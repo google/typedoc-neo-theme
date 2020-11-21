@@ -164,3 +164,22 @@ $member-interface-inherited:      -13 * $icon-size;
         }
     }
 }
+
+.pp-nav > .tsd-kind-icon {
+    padding-left: 0px;
+    text-indent: 0px;
+
+    &:before {
+        background-image: none;
+        width: 0px;
+    }
+}
+
+.pp-nav.pp-group {
+    font-weight: bold;
+    pointer-events: none;
+}
+
+.pp-nav.pp-child {
+    margin-left: 8px;
+}
