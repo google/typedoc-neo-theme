@@ -1,36 +1,53 @@
 <div class="tsd-signature tsd-kind-icon">{{#compact}}
     {{{wbr name}}}
     {{#if typeParameters}}
-        &lt;
-        {{#each typeParameters}}
-            {{#if @index}},&nbsp;{{/if}}
-            {{name}}
-        {{/each}}
-        &gt;
+    &lt;
+    {{#each typeParameters}}
+    {{#if @index}},&nbsp;{{/if}}
+    {{name}}
+    {{/each}}
+    &gt;
     {{/if}}
     <span class="tsd-signature-symbol">{{#if isOptional}}?{{/if}}:</span>&nbsp;{{#with type}}{{>type}}{{/with}}
     {{#if defaultValue}}
-        <span class="tsd-signature-symbol">
+    <span class="tsd-signature-symbol">
         &nbsp;=&nbsp;
         {{defaultValue}}
-        </span>
+    </span>
     {{/if}}
-{{/compact}}</div>
-
-{{> member.sources}}
+    {{/compact}}</div>
 
 {{> comment}}
 
 {{#if typeParameters}}
-    <h4 class="tsd-type-parameters-title">Type parameters</h4>
-    {{> typeParameters}}
+<h4 class="tsd-type-parameters-title">Type parameters</h4>
+{{> typeParameters}}
 {{/if}}
 
 {{#if type.declaration}}
-    <div class="tsd-type-declaration">
-        <h4>Type declaration</h4>
-        {{#with type.declaration}}
-            {{> parameter}}
-        {{/with}}
-    </div>
+<div class="tsd-type-declaration">
+    <h4>Type declaration</h4>
+    {{#with type.declaration}}
+    {{> parameter}}
+    {{/with}}
+</div>
+{{/if}}
+
+
+{{#if sources}}
+<aside class="tsd-sources">
+    <ul>
+        {{#each sources}}
+        {{#if @root.settings.source.[0]}}
+        <li>Defined in
+            <a href="{{@root.settings.source.[0].path}}{{fileName}}#{{@root.settings.source.[0].line}}{{line}}">
+                {{fileName}}:{{line}}
+            </a>
+        </li>
+        {{else}}
+        <li>Defined in {{fileName}}:{{line}}</li>
+        {{/if}}
+        {{/each}}
+    </ul>
+</aside>
 {{/if}}

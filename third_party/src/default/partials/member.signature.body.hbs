@@ -1,56 +1,74 @@
 {{#unless hideSources}}
-    {{> member.sources}}
+{{> member.sources}}
 {{/unless}}
 
 {{> comment}}
 
 {{#if typeParameters}}
-    <h4 class="tsd-type-parameters-title">Type parameters</h4>
-    {{> typeParameters}}
+<h4 class="tsd-type-parameters-title">Type parameters</h4>
+{{> typeParameters}}
 {{/if}}
 
 {{#if parameters}}
-    <h4 class="tsd-parameters-title">Parameters</h4>
-    <ul class="tsd-parameters">
-        {{#each parameters}}
-            <li>
-                <h5>{{#compact}}
-                    {{#each flags}}
-                        <span class="tsd-flag ts-flag{{this}}">{{this}}</span>&nbsp;
-                    {{/each}}
-                    {{#if flags.isRest}}<span class="tsd-signature-symbol">...</span>{{/if}}
-                    {{name}}:&nbsp;
-                    {{#with type}}{{>type}}{{/with}}
-                    {{#if defaultValue}}
-                        <span class="tsd-signature-symbol">
-                        &nbsp;=&nbsp;
-                        {{defaultValue}}
-                        </span>
-                    {{/if}}
-                {{/compact}}</h5>
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameters">
+    {{#each parameters}}
+    <li>
+        <h5>{{#compact}}
+            {{#each flags}}
+            <span class="tsd-flag ts-flag{{this}}">{{this}}</span>&nbsp;
+            {{/each}}
+            {{#if flags.isRest}}<span class="tsd-signature-symbol">...</span>{{/if}}
+            {{name}}:&nbsp;
+            {{#with type}}{{>type}}{{/with}}
+            {{#if defaultValue}}
+            <span class="tsd-signature-symbol">
+                &nbsp;=&nbsp;
+                {{defaultValue}}
+            </span>
+            {{/if}}
+            {{/compact}}</h5>
 
-                {{> comment}}
+        {{> comment}}
 
-                {{#if type.declaration}}
-                    {{#with type.declaration}}
-                        {{> parameter}}
-                    {{/with}}
-                {{/if}}
-            </li>
-        {{/each}}
-    </ul>
+        {{#if type.declaration}}
+        {{#with type.declaration}}
+        {{> parameter}}
+        {{/with}}
+        {{/if}}
+    </li>
+    {{/each}}
+</ul>
 {{/if}}
 
 {{#if type}}
-    <h4 class="tsd-returns-title">Returns {{#with type}}{{>type}}{{/with}}</h4>
+<h4 class="tsd-returns-title">Returns {{#with type}}{{>type}}{{/with}}</h4>
 
-    {{#if comment.returns}}
-        {{#markdown}}{{{comment.returns}}}{{/markdown}}
-    {{/if}}
+{{#if comment.returns}}
+{{#markdown}}{{{comment.returns}}}{{/markdown}}
+{{/if}}
 
-    {{#if type.declaration}}
-        {{#with type.declaration}}
-            {{> parameter}}
-        {{/with}}
-    {{/if}}
+{{#if type.declaration}}
+{{#with type.declaration}}
+{{> parameter}}
+{{/with}}
+{{/if}}
+{{/if}}
+
+{{#if sources}}
+<aside class="tsd-sources">
+    <ul>
+        {{#each sources}}
+        {{#if @root.settings.source.[0]}}
+        <li>Defined in
+            <a href="{{@root.settings.source.[0].path}}{{fileName}}#{{@root.settings.source.[0].line}}{{line}}">
+                {{fileName}}:{{line}}
+            </a>
+        </li>
+        {{else}}
+        <li>Defined in {{fileName}}:{{line}}</li>
+        {{/if}}
+        {{/each}}
+    </ul>
+</aside>
 {{/if}}
