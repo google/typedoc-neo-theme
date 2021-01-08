@@ -11,10 +11,10 @@
   },
   "scripts": {
     "build": "tsc",
-    "docs": "typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default"
+    "docs": "typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default ."
   },
   "devDependencies": {
-    "typedoc": "0.17.8",
+    "typedoc": "0.20.13",
     "typescript": "^3.9.0"
   },
   "resolutions": {

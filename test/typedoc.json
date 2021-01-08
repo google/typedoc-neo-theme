@@ -1,10 +1,11 @@
 {
   "out": "docs",
-  "ignoreCompilerErrors": true,
   "disableOutputCheck": true,
   "excludeExternals": true,
   "excludePrivate": true,
-  "excludeNotExported": true,
+  "exclude": [
+    "./node_modules"
+  ],
   "links": [{
     "label": "Theme",
     "url": "https://github.com/google/typedoc-neo-theme"
