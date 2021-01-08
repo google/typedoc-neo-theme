@@ -8,6 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{{relativeURL "assets/css/main.css"}}">
+    {{#if settings.customScripts}}
+        {{#each settings.customScripts}}
+            <script src="{{path}}"></script>
+        {{/each}}
+    {{/if}}
+    {{#if settings.customStyles}}
+        {{#each settings.customStyles}}
+            <link rel="stylesheet" href="{{path}}">
+        {{/each}}
+    {{/if}}
 </head>
 <body>
 

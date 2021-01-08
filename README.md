@@ -100,6 +100,20 @@ You can set up links to your source code under each property in the documentatio
 For a particular file and line, this can take you to a valid GitHub source for the
 Actions on Google Node.js project.
 
+### Custom resources
+Custom stylesheets and scripts can be bundled in the docs output, placed in the
+output `<head>` of each file. They can be added as an array. Each link must be
+absolute.
+
+```json
+"customStyles": [{
+  "path": "/path/to/file.css"
+}],
+"customScripts": [{
+  "path": "/path/to/file.js"
+}]
+```
+
 ## License
 
 This project is based on [typedoc-default-themes](https://github.com/TypeStrong/typedoc-default-themes/) by
