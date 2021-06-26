@@ -5,5 +5,5 @@
  * @return     The original string, omitting double quotes (`"`).
  */
 export function removeQuotes(str: string): string {
-    return str.replace(/"/g, '')
+    return str ? str.replace(/"/g, '') : undefined;
 }

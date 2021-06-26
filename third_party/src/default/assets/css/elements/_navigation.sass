@@ -286,3 +286,8 @@
         font-size: 13px
     ~ .tsd-kind-enum::before
         content: none
+
+@for $i from 1 through 9
+    .pp-depth-#{$i}
+        margin-left: #{$i*8}px
+    
