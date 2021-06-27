@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "lunr": "^2.3.8",
-    "typedoc": "~0.17.8"
+    "typedoc": "~0.20.13"
   },
   "devDependencies": {
     "@types/lunr": "^2.3.2",

@@ -50,6 +50,20 @@ module.exports = (PluginHost) => {
    */
   app.options.addDeclaration({ name: 'source', type: ParameterType.Mixed })
   app.options.addDeclaration({ name: 'excludeReferences', type: ParameterType.Boolean })
+  /**
+   * Expected array of source files to be loaded in <head>:
+   * interface CustomScript {
+   *   path: string
+   * }
+   */
+  app.options.addDeclaration({ name: 'customScripts', type: ParameterType.Mixed })
+  /**
+   * Expected array of style files to be loaded in <head>:
+   * interface CustomStyle {
+   *   path: string
+   * }
+   */
+  app.options.addDeclaration({ name: 'customStyles', type: ParameterType.Mixed })
 
   app.converter.addComponent('loopingz-theme', plugin.ExternalModuleMapPlugin)
 

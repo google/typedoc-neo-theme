@@ -11,16 +11,16 @@
   },
   "scripts": {
     "build": "tsc",
-    "docs": "typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default"
+    "docs": "typedoc --options typedoc.json --theme node_modules/typedoc-neo-theme/bin/default ."
   },
   "devDependencies": {
-    "typedoc": "0.17.8",
+    "typedoc": "0.20.13",
     "typescript": "^3.9.0"
   },
   "resolutions": {
     "typedoc/marked": "0.7.0"
   },
   "dependencies": {
-    "typedoc-neo-theme": "file:../typedoc-neo-theme-v1.0.10.tgz"
+    "typedoc-neo-theme": "file:../typedoc-neo-theme-v1.1.0.tgz"
   }
 }

@@ -111,24 +111,16 @@ module typedoc.search {
       setLoadingState(SearchLoadingState.Failure);
       return;
     }
-    fetch(url)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('The search index is missing');
-        }
 
-        return response.json();
-      })
-      .then((source: IData) => {
-        data = source;
-        index = lunr.Index.load(source.index);
-
-        initializePriorityResults();
-        setLoadingState(SearchLoadingState.Ready);
-      })
-      .catch((error) => {
-        setLoadingState(SearchLoadingState.Failure);
-      });
+    try {
+      data = window['searchData']
+      index = lunr.Index.load(data.index);
+      
+      initializePriorityResults();
+      setLoadingState(SearchLoadingState.Ready);
+    } catch (e) {
+      setLoadingState(SearchLoadingState.Failure);
+    }
   }
 
   /**
@@ -142,7 +134,9 @@ module typedoc.search {
     if (loadingState !== SearchLoadingState.Ready) return
     $results.empty()
 
-    const res = index.search(query)
+    // Fuzzy match
+    // See https://lunrjs.com/docs/lunr.Index.html#~QueryString
+    const res = index.search(`*${query}*`)
     for (let i = 0, c = Math.min(10, res.length); i < c; i++) {
       const row = data.rows[res[i].ref]
       let name = row.name
