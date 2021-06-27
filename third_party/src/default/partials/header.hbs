@@ -18,11 +18,14 @@
                         <li data-name="{{name}}" data-subtitle="{{subtitle}}"></li>
                         {{/each}}
                     </ul>
-
-                    <a href="{{relativeURL "index.html"}}" class="title">{{project.name}}</a>
-                    {{#each settings.links}}
-                    &emsp;<a href="{{url}}" class="title">{{label}}</a>
-                    {{/each}}
+                    <div class="topMenu">
+                        <a href="{{relativeURL "index.html"}}" class="title">{{project.name}}</a>
+                        <div class="links">
+                            {{#each settings.links}}
+                            &emsp;<a href="{{url}}" class="title">{{label}}</a>
+                            {{/each}}
+                        </div>
+                    </div>
                 </div>
 
                 <div class="table-cell" id="tsd-widgets">

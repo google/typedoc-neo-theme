@@ -287,6 +287,24 @@
     ~ .tsd-kind-enum::before
         content: none
 
+.tsd-navigation.root ul.current
+    font-weight: bold
+    background-color: #e4e4e4
+    border-left: #457aff solid 3px
+
+.tsd-navigation.root ul.current a
+    color: #457aff
+
+#tsd-search.has-focus .topMenu
+    display: none
+
+#tsd-search .topMenu .links
+    width: 100%
+    text-align: center
+
+#tsd-search .topMenu
+    display: flex
+
 @for $i from 1 through 9
     .pp-depth-#{$i}
         margin-left: #{$i*8}px
