@@ -15,7 +15,7 @@
  */
 let { ParameterType, ReflectionKind } = require('typedoc/dist/lib/utils/options/declaration');
 let plugin = require('./bin/default/plugin')
-module.exports = (PluginHost) => {
+module.exports.load = (PluginHost) => {
   const app = PluginHost.owner
   /*
    * Expected array:
